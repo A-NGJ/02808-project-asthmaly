@@ -5,6 +5,9 @@ import { useColorScheme } from 'react-native';
 
 import {Light, Dark} from './src/styles/style';
 import { NativeBaseProvider, Text, Box } from 'native-base';
+import { useColorScheme } from 'react-native';
+
+import {Light, Dark} from './src/styles/style';
 
 export default function App() {
   const scheme = useColorScheme();
