@@ -5,11 +5,21 @@ import {Home} from '../pages/Home';
 import {Visualization} from '../pages/Visualization';
 import {Profile} from '../pages/Profile';
 
+import { useTheme } from '@react-navigation/native';
+
 const Tab = createBottomTabNavigator();
 
 export function MenuTabs() {
+  const {colors} = useTheme();
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions = {{
+        tabBarActiveTintColor: colors.buttonActive,
+        tabBarInactiveTintColor: colors.buttonInactive,
+        tabBarActiveBackgroundColor: colors.background,
+        tabBarInactiveBackgroundColor: colors.background,
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={Home}
