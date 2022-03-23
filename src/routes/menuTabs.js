@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Home} from '../pages/Home';
 import {Visualization} from '../pages/Visualization';
 import {Profile} from '../pages/Profile';
@@ -16,12 +16,38 @@ export function MenuTabs() {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <MaterialCommunityIcons
+              name="home-outline"
+              color={color}
+              size={size}
+            />
           ),
         }}
       />
-      <Tab.Screen name="Visualization" component={Visualization} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen
+        name="Visualization"
+        component={Visualization}
+        options={{
+          tabBarLabel: 'Data Visualization',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="poll" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="account-outline"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
