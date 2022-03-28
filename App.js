@@ -6,15 +6,15 @@ import { useColorScheme } from 'react-native';
 import {Light, Dark} from './src/styles/style';
 import { NativeBaseProvider, Text, Box } from 'native-base';
 import { useColorScheme } from 'react-native';
-
 import {Light, Dark} from './src/styles/style';
-import { NativeBaseProvider, Text, Box } from 'native-base';
 
 export default function App() {
   const scheme = useColorScheme();
   return (
     <NativeBaseProvider>
-      <NavigationContainer theme={scheme === 'dark' ? Dark : Light}>
+      {/* Make the dynamic dark and light mode work again after using: 
+      <NavigationContainer theme={scheme === 'dark' ? Dark : Light}> */}
+      <NavigationContainer theme={Dark}>
         <MenuTabs />
       </NavigationContainer>
     </NativeBaseProvider>
