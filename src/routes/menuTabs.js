@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {Home} from '../pages/Home';
 import {Visualization} from '../pages/Visualization';
@@ -27,9 +28,45 @@ export function MenuTabs() {
         tabBarInactiveBackgroundColor: colors.background,
       }}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Visualization" component={Visualization} />
-      <Tab.Screen name="ProfileHome" component={NavProfile} options={{title: 'Profile'}}/>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="home-outline"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Visualization"
+        component={Visualization}
+        options={{
+          tabBarLabel: 'Data Visualization',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="poll" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ProfileHome"
+        component={NavProfile}
+        options={{
+          title: 'Profile',
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="account-outline"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
