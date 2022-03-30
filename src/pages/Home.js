@@ -23,12 +23,19 @@ export function Home() {
             <View>
                 <Box alignItems="center">
                     <Button key={'lg'} size={'lg'} style = {styles.button}>
-                        <Text style={styles.buttonHeader}>
-                            Track Symptom
-                        </Text>
-                        <Text style={styles.buttonFooter}>
-                            Overall Asthma Symptoms
-                        </Text>
+                        <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                            <View style={{margin: 0}}>
+                                <Image source={require('../images/symptom_icon.png')} style={styles.iconImage}/>
+                            </View>
+                            <View>
+                                <Text style={styles.buttonHeader}>
+                                    Track Symptom
+                                </Text>
+                                <Text style={styles.buttonFooter}>
+                                    Overall Asthma Symptoms
+                                </Text>
+                            </View>
+                        </View>
                     </Button>
                 </Box>
             </View>
@@ -37,12 +44,19 @@ export function Home() {
             <View>
                 <Box alignItems="center">
                     <Button key={'lg'} size={'lg'} style = {styles.button}>
-                        <Text style={styles.buttonHeader}>
-                            Track Medication
-                        </Text>
-                        <Text style={styles.buttonFooter}>
-                            Preventative or Acute Medication
-                        </Text>
+                        <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                            <View style={{margin: 0}}>
+                                <Image source={require('../images/medication_icon.png')} style={styles.iconImage}/>
+                            </View>
+                            <View>
+                            <Text style={styles.buttonHeader}>
+                                Track Medication
+                            </Text>
+                            <Text style={styles.buttonFooter}>
+                                Preventative or Acute Medication
+                            </Text>
+                            </View>
+                        </View>
                     </Button>
                 </Box>
             </View>
@@ -56,12 +70,19 @@ export function Home() {
             <View>
                 <Box alignItems="center">
                     <Button key={'lg'} size={'lg'} style = {styles.button}>
-                        <Text style={styles.buttonHeader}>
-                            Track Activity
-                        </Text>
-                        <Text style={styles.buttonFooter}>
-                            Any Symptom-Causing Movement
-                        </Text>
+                        <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                            <View style={{margin: 0}}>
+                                <Image source={require('../images/exercise_icon.png')} style={styles.iconImage}/>
+                            </View>
+                            <View>
+                            <Text style={styles.buttonHeader}>
+                                Track Activity
+                            </Text>
+                            <Text style={styles.buttonFooter}>
+                                Any Symptom-Causing Movement
+                            </Text>
+                            </View>
+                        </View>
                     </Button>
                 </Box>
             </View>
@@ -91,7 +112,7 @@ const styles = StyleSheet.create({
     buttonHeader : {
         width: 240,
         fontSize: 15,
-        left: 20,
+        left: -18,
         font: 'roboto',
         color: "white",
         fontWeight: "bold",
@@ -99,7 +120,7 @@ const styles = StyleSheet.create({
     buttonFooter : {
         width: 240,
         fontSize: 15,
-        left: 20,
+        left: -18,
         font: 'roboto',
         color: "white",
     },
@@ -113,6 +134,18 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    iconBound : {
+        flex: 1,
+        width: 10,
+        height: 10,
+        resizeMode: 'contain' 
+    },
+
+    iconImage : {
+        flex: 1,
+        resizeMode: 'contain',
+        left: -18,
     },
 
   });
