@@ -102,6 +102,7 @@ export function Home() {
 const border_radius = 6
 
 const styles = StyleSheet.create({
+    // General button design
     button: {
       backgroundColor: "#383434",
     //   backgroundColor: "purple",
@@ -112,12 +113,16 @@ const styles = StyleSheet.create({
       borderBottomLeftRadius: border_radius,
       borderBottomRightRadius: border_radius,
     },
+
+    // Heading text
     maintext : {
         fontSize: 20,
         font: 'roboto',
         color: "white",
         // fontWeight: "bold",
     },
+
+    // Button header
     buttonHeader : {
         width: 240,
         fontSize: 15,
@@ -126,6 +131,8 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold",
     },
+
+    // Button describing text
     buttonFooter : {
         width: 240,
         fontSize: 15,
@@ -133,24 +140,23 @@ const styles = StyleSheet.create({
         font: 'roboto',
         color: "white",
     },
+
+    // Small text for email
     emailText : {
         fontSize: 12,
         color: "gray",
         font: "roboto",
     },
+
+    // Add profile picture
     profilePicture : {
         borderRadius: 100,
         flexDirection:'row',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    iconBound : {
-        flex: 1,
-        width: 10,
-        height: 10,
-        resizeMode: 'contain' 
-    },
 
+    // Image sizing info
     iconImage : {
         flex: 1,
         resizeMode: 'contain',
