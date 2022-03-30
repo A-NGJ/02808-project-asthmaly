@@ -1,5 +1,9 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, StyleSheet, Image, Dimensions} from 'react-native';
+import {Button, Box} from "native-base";
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export function Home() {
   return (

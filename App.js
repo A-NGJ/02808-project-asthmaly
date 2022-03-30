@@ -1,15 +1,19 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import { MenuTabs, TopNavigator } from "./src/routes/menuTabs";
+import {MenuTabs} from './src/routes/menuTabs';
 import { useColorScheme } from 'react-native';
-
+import { NativeBaseProvider} from 'native-base';
 import {Light, Dark} from './src/styles/style';
 
 export default function App() {
   const scheme = useColorScheme();
   return (
-    <NavigationContainer theme={scheme === 'dark' ? Dark : Light}>
-      <TopNavigator />
-    </NavigationContainer>
+    <NativeBaseProvider>
+      {/* Make the dynamic dark and light mode work again after using:
+      <NavigationContainer theme={scheme === 'dark' ? Dark : Light}> */}
+      <NavigationContainer theme={Dark}>
+        <TopNavigator />
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 }
