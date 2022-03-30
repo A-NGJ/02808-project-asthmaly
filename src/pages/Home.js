@@ -8,26 +8,27 @@ const windowHeight = Dimensions.get('window').height;
 export function Home() {
     // From https://docs.nativebase.io/button
     return (
-        <View style={{height: windowHeight, width: windowWidth}}>
+        <View style={{height: windowHeight, width: windowWidth, margin: 5, flex: 1}}>
             {/* Profile info */}
-            <View style = {{top: 50, justifyContent: 'center', alignItems: 'center'}}>
+            <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
                 <Image source={require('../images/anne_nielsen_profile_picture.png')} style={styles.profilePicture} />
             </View>
-            <View style = {{top: 50, justifyContent: 'center', alignItems: 'center'}}>
+            <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.maintext}>Anne Nielsen</Text>
             </View>
-            <View style = {{top: 50, justifyContent: 'center', alignItems: 'center'}}>
+            <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.emailText}>anne_n@gmail.com</Text>
             </View>
 
             {/* Buttons and text fields */}
-            <View style={{top: 140, justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{top: '21%', justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.maintext}>REPORT A SYMPTOM</Text>
             </View>
-            <View style = {{height:150}}>
+            <View style = {{marginTop:'38%'}}>
             </View>
 
             {/* Track a symptom button */}
+            <View style={{flex: 1}}>
             <View>
                 <Box alignItems="center">
                     <Button key={'lg'} bg="#383434" size={'lg'} style = {styles.button} _pressed={{bg: "gray.800"}}>
@@ -47,7 +48,7 @@ export function Home() {
                     </Button>
                 </Box>
             </View>
-            <View style = {{height:15}}>
+            <View style = {{marginTop: '5%'}}>
             </View>
 
             {/* Track medication button */}
@@ -70,14 +71,15 @@ export function Home() {
                     </Button>
                 </Box>
             </View>
-            <View style = {{height:30}}>
             </View>
+            {/* <View style = {{marginTop: '8%'}}>
+            </View> */}
 
             {/* Track activity button */}
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.maintext}>OTHER</Text>
             </View>
-            <View style = {{height:10}}>
+            <View style = {{marginTop: '2%'}}>
             </View>
             <View>
                 <Box alignItems="center">
@@ -108,12 +110,13 @@ const styles = StyleSheet.create({
     // General button design
     button: {
     //   backgroundColor: "#383434",
-      width: 350,
-      height: 75,
-      borderTopLeftRadius: border_radius,
-      borderTopRightRadius: border_radius,
-      borderBottomLeftRadius: border_radius,
-      borderBottomRightRadius: border_radius,
+        // width: 350,
+        width: '90%',
+        aspectRatio: 350 / 75,
+        borderTopLeftRadius: border_radius,
+        borderTopRightRadius: border_radius,
+        borderBottomLeftRadius: border_radius,
+        borderBottomRightRadius: border_radius,
     },
 
     // Heading text
@@ -126,9 +129,10 @@ const styles = StyleSheet.create({
 
     // Button header
     buttonHeader : {
-        width: 240,
+        height: '45%',
+        aspectRatio: 240 / 30,
         fontSize: 15,
-        left: -18,
+        left: '5%',
         font: 'roboto',
         color: "white",
         fontWeight: "bold",
@@ -136,9 +140,10 @@ const styles = StyleSheet.create({
 
     // Button describing text
     buttonFooter : {
-        width: 240,
+        height: '45%',
+        aspectRatio: 240 / 20,
         fontSize: 15,
-        left: -18,
+        left: '5%',
         font: 'roboto',
         color: "white",
     },
@@ -162,7 +167,7 @@ const styles = StyleSheet.create({
     iconImage : {
         flex: 1,
         resizeMode: 'contain',
-        left: -18,
+        left: 0,
     },
 
   });
