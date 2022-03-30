@@ -6,6 +6,7 @@ export function Home() {
     // From https://docs.nativebase.io/button
     return (
         <View>
+            {/* Profile info */}
             <View style = {{top: 50, justifyContent: 'center', alignItems: 'center'}}>
                 <Image source={require('../images/anne_nielsen_profile_picture.png')} style={styles.profilePicture} />
             </View>
@@ -15,11 +16,15 @@ export function Home() {
             <View style = {{top: 50, justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.emailText}>anne_n@gmail.com</Text>
             </View>
+
+            {/* Buttons and text fields */}
             <View style={{top: 140, justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.maintext}>REPORT A SYMPTOM</Text>
             </View>
             <View style = {{height:150}}>
             </View>
+
+            {/* Track a symptom button */}
             <View>
                 <Box alignItems="center">
                     <Button key={'lg'} size={'lg'} style = {styles.button}>
@@ -41,6 +46,8 @@ export function Home() {
             </View>
             <View style = {{height:15}}>
             </View>
+
+            {/* Track medication button */}
             <View>
                 <Box alignItems="center">
                     <Button key={'lg'} size={'lg'} style = {styles.button}>
@@ -62,6 +69,8 @@ export function Home() {
             </View>
             <View style = {{height:30}}>
             </View>
+
+            {/* Track activity button */}
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.maintext}>OTHER</Text>
             </View>
