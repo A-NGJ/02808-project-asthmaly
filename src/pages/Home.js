@@ -1,11 +1,14 @@
 import * as React from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
-import { Button, Box} from "native-base";
+import {Text, View, StyleSheet, Image, Dimensions} from 'react-native';
+import {Button, Box} from "native-base";
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export function Home() {
     // From https://docs.nativebase.io/button
     return (
-        <View>
+        <View style={{height: windowHeight, width: windowWidth}}>
             {/* Profile info */}
             <View style = {{top: 50, justifyContent: 'center', alignItems: 'center'}}>
                 <Image source={require('../images/anne_nielsen_profile_picture.png')} style={styles.profilePicture} />
@@ -27,7 +30,7 @@ export function Home() {
             {/* Track a symptom button */}
             <View>
                 <Box alignItems="center">
-                    <Button key={'lg'} size={'lg'} style = {styles.button}>
+                    <Button key={'lg'} bg="#383434" size={'lg'} style = {styles.button} _pressed={{bg: "gray.800"}}>
                         <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                             <View style={{margin: 0}}>
                                 <Image source={require('../images/symptom_icon.png')} style={styles.iconImage}/>
@@ -50,7 +53,7 @@ export function Home() {
             {/* Track medication button */}
             <View>
                 <Box alignItems="center">
-                    <Button key={'lg'} size={'lg'} style = {styles.button}>
+                    <Button key={'lg'} bg="#383434" size={'lg'} style = {styles.button} _pressed={{bg: "gray.800"}}>
                         <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                             <View style={{margin: 0}}>
                                 <Image source={require('../images/medication_icon.png')} style={styles.iconImage}/>
@@ -78,7 +81,7 @@ export function Home() {
             </View>
             <View>
                 <Box alignItems="center">
-                    <Button key={'lg'} size={'lg'} style = {styles.button}>
+                    <Button key={'lg'} bg="#383434" size={'lg'} style = {styles.button} _pressed={{bg: "gray.800"}}>
                         <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                             <View style={{margin: 0}}>
                                 <Image source={require('../images/exercise_icon.png')} style={styles.iconImage}/>
@@ -104,8 +107,7 @@ const border_radius = 6
 const styles = StyleSheet.create({
     // General button design
     button: {
-      backgroundColor: "#383434",
-    //   backgroundColor: "purple",
+    //   backgroundColor: "#383434",
       width: 350,
       height: 75,
       borderTopLeftRadius: border_radius,
