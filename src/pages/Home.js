@@ -10,18 +10,18 @@ export function Home() {
     return (
         <View style={{height: windowHeight, width: windowWidth, margin: 5, flex: 1}}>
             {/* Profile info */}
-            <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
+            <View style = {{marginTop: '5%', justifyContent: 'center', alignItems: 'center'}}>
                 <Image source={require('../images/anne_nielsen_profile_picture.png')} style={styles.profilePicture} />
             </View>
-            <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
+            <View style = {{marginTop: '5%', justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.maintext}>Anne Nielsen</Text>
             </View>
-            <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
+            <View style = {{marginTop: '5%', justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.emailText}>anne_n@gmail.com</Text>
             </View>
 
             {/* Buttons and text fields */}
-            <View style={{top: '21%', justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{marginTop: '21%', justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.maintext}>REPORT A SYMPTOM</Text>
             </View>
             <View style = {{marginTop:'38%'}}>
