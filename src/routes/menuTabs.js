@@ -20,11 +20,11 @@ export function TopNavigator() {
         <Stack.Screen
           name="Home"
           component={Home}
-          /*options={{
+          options={{
             headerRight: () => (
               <Icon as={Ionicons} name="home"/>
             ),
-          }}*/
+          }}
         />
       </Stack.Navigator>
   );
