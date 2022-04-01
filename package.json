@@ -11,13 +11,11 @@
     "windows": "react-native run-windows"
   },
   "dependencies": {
+    "@expo/vector-icons": "^12.0.5",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
-    "native-base": "^3.3.7",
-    "react": "^17.0.2",
-    "react-native": "0.67.4",
     "native-base": "^3.3.10",
     "react": "17.0.2",
     "react-native": "0.67.3",
