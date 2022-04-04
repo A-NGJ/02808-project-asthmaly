@@ -1,13 +1,10 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Home} from '../pages/Home';
 import {Visualization} from '../pages/Visualization';
 import {Profile} from '../pages/Profile';
-import { Icon } from 'native-base';
-import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from '@react-navigation/native';
 
@@ -20,11 +17,11 @@ export function TopNavigator() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{
+          /*options={{
             headerRight: () => (
               <Icon as={Ionicons} name="home"/>
             ),
-          }}
+          }}*/
         />
       </Stack.Navigator>
   );
@@ -46,13 +43,13 @@ export function MenuTabs() {
         component={Home}
         options={{
           tabBarLabel: 'Home',
-          /*tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
+          tabBarIcon: ({color, size}) => (
+            <Icon
               name="home-outline"
               color={color}
               size={size}
             />
-          ),*/
+          ),
         }}
       />
       <Tab.Screen
@@ -60,9 +57,9 @@ export function MenuTabs() {
         component={Visualization}
         options={{
           tabBarLabel: 'Data Visualization',
-          /*tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="poll" color={color} size={size} />
-          ),*/
+          tabBarIcon: ({color, size}) => (
+            <Icon name="poll" color={color} size={size} />
+          ),
         }}
       />
       <Tab.Screen
@@ -70,13 +67,13 @@ export function MenuTabs() {
         component={Profile}
         options={{
           tabBarLabel: 'Profile',
-          /*tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
+          tabBarIcon: ({color, size}) => (
+            <Icon
               name="account-outline"
               color={color}
               size={size}
             />
-          ),*/
+          ),
         }}
       />
     </Tab.Navigator>
