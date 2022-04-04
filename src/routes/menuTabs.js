@@ -17,11 +17,41 @@ export function TopNavigator() {
         <Stack.Screen
           name="Home"
           component={Home}
-          /*options={{
-            headerRight: () => (
-              <Icon as={Ionicons} name="home"/>
+          options={{
+            headerRight: ({color, size}) => (
+                <Icon
+                  name="dots-vertical"
+                  color={color}
+                  size={25}
+                />
             ),
-          }}*/
+          }}
+        />
+        <Stack.Screen
+          name="Visualization"
+          component={Visualization}
+          options={{
+            headerRight: ({color, size}) => (
+                <Icon
+                  name="dots-vertical"
+                  color={color}
+                  size={25}
+                />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            headerRight: ({color, size}) => (
+                <Icon
+                  name="dots-vertical"
+                  color={color}
+                  size={25}
+                />
+            ),
+          }}
         />
       </Stack.Navigator>
   );
@@ -58,7 +88,10 @@ export function MenuTabs() {
         options={{
           tabBarLabel: 'Data Visualization',
           tabBarIcon: ({color, size}) => (
-            <Icon name="poll" color={color} size={size} />
+            <Icon
+              name="poll"
+              color={color}
+              size={size} />
           ),
         }}
       />
