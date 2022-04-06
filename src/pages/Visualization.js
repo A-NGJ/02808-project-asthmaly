@@ -10,10 +10,10 @@ Visualization.navigationOptions = ({ navigation }) => ({
       color={color}
       size={size} />
   ),
-  headerRight: ({ color }) => (
+  headerRight: () => (
     <Icon
       name="dots-vertical"
-      color={color}
+      color={"#ffff"}
       size={25}
       onPress={() => navigation.navigate("Settings")}
     />
