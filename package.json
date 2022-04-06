@@ -34,9 +34,6 @@
     "react-native-template-native-base": "^1.0.7",
     "react-native-vector-icons": "^9.1.0",
     "react-native-windows": "0.67.4",
-    "react-vega": "^7.4.4",
-    "vega": "^5.22.1",
-    "vega-lite": "^5.2.0",
     "victory-native": "^36.3.1"
   },
   "devDependencies": {
