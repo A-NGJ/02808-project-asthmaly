@@ -1,17 +1,16 @@
 import * as React from "react";
 import { Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { Profile } from "./Profile";
 
 Visualization.navigationOptions = ({ navigation }) => ({
   tabBarLabel: "Visualization",
   tabBarIcon: ({ color, size }) => (
     <Icon
-      name="account-outline"
+      name="poll"
       color={color}
       size={size} />
   ),
-  headerRight: ({ color, size }) => (
+  headerRight: ({ color }) => (
     <Icon
       name="dots-vertical"
       color={color}
