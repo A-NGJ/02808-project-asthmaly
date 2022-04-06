@@ -6,7 +6,7 @@ Profile.navigationOptions = ({ navigation }) => ({
   tabBarLabel: "Profile",
   tabBarIcon: ({ color, size }) => (
     <Icon
-      name="poll"
+      name="account-outline"
       color={color}
       size={size} />
   ),
