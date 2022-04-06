@@ -1,7 +1,5 @@
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { BottomTabBar } from "@react-navigation/bottom-tabs";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Settings } from "../pages/Settings";
 import { Home } from "../pages/Home";
 import { Visualization } from "../pages/Visualization";
@@ -15,12 +13,20 @@ export function TabNavigator() {
   const { colors } = useTheme();
   return (
     <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: colors.buttonActive,
-        tabBarInactiveTintColor: colors.buttonInactive,
-        tabBarActiveBackgroundColor: colors.background,
-        tabBarInactiveBackgroundColor: colors.background,
-      }}
+      screenOptions={({ route }) => (
+        {
+          tabBarActiveTintColor: colors.buttonActive,
+          tabBarInactiveTintColor: colors.buttonInactive,
+          tabBarActiveBackgroundColor: colors.background,
+          tabBarInactiveBackgroundColor: colors.background,
+          tabBarButton: [
+            "Settings",
+          ].includes(route.name)
+            ? () => {
+              return null;
+            }
+            : undefined,
+        })}
     >
       <Tab.Screen
         name="Home"
