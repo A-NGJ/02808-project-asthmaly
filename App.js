@@ -2,7 +2,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {MenuTabs} from './src/routes/menuTabs';
 import { useColorScheme } from 'react-native';
-import { NativeBaseProvider, Text, Box } from 'native-base';
+import { NativeBaseProvider } from 'native-base';
 import {Light, Dark} from './src/styles/style';
 
 export default function App() {
