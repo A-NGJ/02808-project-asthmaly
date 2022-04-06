@@ -2,11 +2,15 @@ import * as React from 'react';
 import {Text, View, StyleSheet, Image, Dimensions} from 'react-native';
 import {Button, Box} from "native-base";
 
+import {Obs} from '../constants/constants';
+import FirebaseConn from '../connection/firestore';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export function Home() {
     // From https://docs.nativebase.io/button
+    const firebaseConn = new FirebaseConn();
     return (
         <View style={{height: windowHeight, width: windowWidth, margin: 5, flex: 1}}>
             {/* Profile info */}
@@ -31,7 +35,11 @@ export function Home() {
             <View style={{flex: 1}}>
             <View>
                 <Box alignItems="center">
-                    <Button key={'lg'} bg="#383434" size={'lg'} style = {styles.button} _pressed={{bg: "gray.800"}}>
+                    <Button
+                      key={'lg'} bg="#383434" size={'lg'}
+                      style = {styles.button} _pressed={{bg: "gray.800"}}
+                      onPress={() => firebaseConn.addObs(Obs.SYMPTOMS)}
+                    >
                         <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                             <View style={{margin: 0}}>
                                 <Image source={require('../images/symptom_icon.png')} style={styles.iconImage}/>
@@ -54,7 +62,10 @@ export function Home() {
             {/* Track medication button */}
             <View>
                 <Box alignItems="center">
-                    <Button key={'lg'} bg="#383434" size={'lg'} style = {styles.button} _pressed={{bg: "gray.800"}}>
+                    <Button key={'lg'} bg="#383434" size={'lg'}
+                      style = {styles.button} _pressed={{bg: "gray.800"}}
+                      onPress={() => firebaseConn.addObs(Obs.MEDICATION)}
+                    >
                         <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                             <View style={{margin: 0}}>
                                 <Image source={require('../images/medication_icon.png')} style={styles.iconImage}/>
