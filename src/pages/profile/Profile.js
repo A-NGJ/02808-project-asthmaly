@@ -81,14 +81,19 @@ function Profile({ navigation }) {
     <View style={profileStyles.container}>
       <FlatList
         data={[
-          {key: 'Account', icon: 'account', iconType: IconType.MaterialCommunity, navigateTo: 'ProfileAccount'},
-          {key: 'Settings', icon: 'settings', iconType: IconType.Ionicons, navigateTo: 'ProfileSettings'},
-          {key: 'Send Data To Doctor', icon: 'medical-bag', iconType: IconType.MaterialCommunity, navigateTo: 'ProfileDoctor'},
-          {key: 'Feedback & Support', icon: 'comment-question', iconType: IconType.MaterialCommunity, navigateTo: 'ProfileFeedbackSupport'},
-          {key: 'About', icon: 'information-outline', iconType: IconType.MaterialCommunity, navigateTo: 'ProfileAbout'},
-          {key: 'Logout', icon: 'logout', iconType: IconType.MaterialCommunity},
+          {key: 'Account', icon: 'account', iconType: IconType.MaterialCommunity,
+            onPress: () => navigation.navigate('ProfileAccount')},
+          // {key: 'Settings', icon: 'settings', iconType: IconType.Ionicons,
+          //   onPress: () => navigation.navigate('ProfileSettings')},
+          {key: 'Send Data To Doctor', icon: 'medical-bag', iconType: IconType.MaterialCommunity,
+            onPress: () => navigation.navigate('ProfileDoctor')},
+          {key: 'Feedback & Support', icon: 'comment-question', iconType: IconType.MaterialCommunity,
+            onPress: () => navigation.navigate('ProfileFeedbackSupport')},
+          {key: 'About', icon: 'information-outline', iconType: IconType.MaterialCommunity,
+            onPress: () => navigation.navigate('ProfileAbout')},
+          {key: 'Logout', icon: 'logout', iconType: IconType.MaterialCommunity, onPress: () => {}},
         ]}
-        renderItem={({item}) => IconButton(item, colors, () => navigation.navigate(item.navigateTo))}
+        renderItem={({item}) => IconButton(item, colors, item.onPress)}
       />
     </View>
   );

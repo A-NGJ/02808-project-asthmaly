@@ -20,8 +20,9 @@ function IconTextInput(colors, iconName, input, setInput, {
         color={colors.primary}
       />
       <TextInput
-        style={profileStyles.input}
+        style={[profileStyles.input, {color: colors.primary}]}
         placeholder={placeholder}
+        placeholderTextColor={colors.buttonInactive}
         onChangeText={newInput => setInput(newInput)}
         textContentType={textContentType}
         defaultValue={input}

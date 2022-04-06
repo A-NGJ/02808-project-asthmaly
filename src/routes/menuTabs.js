@@ -75,7 +75,7 @@ export function NavProfile() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Profile" component={Profile} options={{title: 'Profile', headerShown: false}}/>
-      <Stack.Screen name="ProfileSettings" component={ProfileSettings} options={{title: 'Settings'}}/>
+      {/* <Stack.Screen name="ProfileSettings" component={ProfileSettings} options={{title: 'Settings'}}/> */}
       <Stack.Screen name="ProfileAccount" component={ProfileAccount} options={{title: 'Account'}}/>
       <Stack.Screen name="ProfileDoctor" component={ProfileDoctor} options={{title: 'Send Data to Doctor'}}/>
       <Stack.Screen name="ProfileFeedbackSupport" component={ProfileFeedbackSupport} options={{title: 'Feedback & Support'}}/>
