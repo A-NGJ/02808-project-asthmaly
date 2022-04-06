@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
 import { Button, Box } from "native-base";
+import { storeData } from "../utils/storeData";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -31,7 +32,13 @@ export function Home() {
       <View style={{ flex: 1 }}>
         <View>
           <Box alignItems="center">
-            <Button key={"lg"} bg="#383434" size={"lg"} style={styles.button} _pressed={{ bg: "gray.800" }}>
+            <Button
+              key={"lg"}
+              bg="#383434"
+              size={"lg"}
+              style={styles.button}
+              _pressed={{ bg: "gray.800" }}
+              onPress={storeData("symptom")}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <View style={{ margin: 0 }}>
                   <Image source={require("../images/symptom_icon.png")} style={styles.iconImage} />
@@ -54,7 +61,13 @@ export function Home() {
         {/* Track medication button */}
         <View>
           <Box alignItems="center">
-            <Button key={"lg"} bg="#383434" size={"lg"} style={styles.button} _pressed={{ bg: "gray.800" }}>
+            <Button
+              key={"lg"}
+              bg="#383434"
+              size={"lg"}
+              style={styles.button}
+              _pressed={{ bg: "gray.800" }}
+              onPress={storeData("medication")}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <View style={{ margin: 0 }}>
                   <Image source={require("../images/medication_icon.png")} style={styles.iconImage} />
@@ -81,7 +94,13 @@ export function Home() {
       </View>
       <View>
         <Box alignItems="center">
-          <Button key={"lg"} bg="#383434" size={"lg"} style={styles.button} _pressed={{ bg: "gray.800" }}>
+          <Button
+            key={"lg"}
+            bg="#383434"
+            size={"lg"}
+            style={styles.button}
+            _pressed={{ bg: "gray.800" }}
+            onPress={storeData("activity")}>
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <View style={{ margin: 0 }}>
                 <Image source={require("../images/exercise_icon.png")} style={styles.iconImage} />
