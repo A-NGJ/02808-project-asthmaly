@@ -1,9 +1,9 @@
 import * as React from "react";
 
-export function storeData(button) {
+export function storeData(buttonType) {
   const timestamp = new Date();
 
-  switch (button) {
+  switch (buttonType) {
 
     case "symptom":
       // store user timestamp in firebase under document with symptom logs
