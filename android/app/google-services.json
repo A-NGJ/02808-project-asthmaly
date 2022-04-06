@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "367241332538",
+    "project_id": "asthmaly-e3b3b",
+    "storage_bucket": "asthmaly-e3b3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367241332538:android:799d763ce09581a400f203",
+        "android_client_info": {
+          "package_name": "com.project02808"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367241332538-godudr4c1frq9hclg6aegrgpj57b0gee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYGjVGbOQfzaBNkDNPp663SECTsC02y5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367241332538-godudr4c1frq9hclg6aegrgpj57b0gee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
