@@ -2,6 +2,7 @@ import * as React from "react";
 import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
 import { Button, Box } from "native-base";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { storeData } from "../utils/storeData";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -29,18 +30,18 @@ export function Home() {
   return (
     <View style={{ height: windowHeight, width: windowWidth, margin: 5, flex: 1 }}>
       {/* Profile info */}
-      <View style={{ marginTop: "5%", justifyContent: "center", alignItems: "center" }}>
+      <View style={{ top: "5%", justifyContent: "center", alignItems: "center" }}>
         <Image source={require("../images/anne_nielsen_profile_picture.png")} style={styles.profilePicture} />
       </View>
-      <View style={{ marginTop: "5%", justifyContent: "center", alignItems: "center" }}>
+      <View style={{ top: "5%", justifyContent: "center", alignItems: "center" }}>
         <Text style={styles.maintext}>Anne Nielsen</Text>
       </View>
-      <View style={{ marginTop: "5%", justifyContent: "center", alignItems: "center" }}>
+      <View style={{ top: "5%", justifyContent: "center", alignItems: "center" }}>
         <Text style={styles.emailText}>anne_n@gmail.com</Text>
       </View>
 
       {/* Buttons and text fields */}
-      <View style={{ marginTop: "21%", justifyContent: "center", alignItems: "center" }}>
+      <View style={{ top: "21%", justifyContent: "center", alignItems: "center" }}>
         <Text style={styles.maintext}>REPORT A SYMPTOM</Text>
       </View>
       <View style={{ marginTop: "38%" }}>
@@ -50,7 +51,13 @@ export function Home() {
       <View style={{ flex: 1 }}>
         <View>
           <Box alignItems="center">
-            <Button key={"lg"} bg="#383434" size={"lg"} style={styles.button} _pressed={{ bg: "gray.800" }}>
+            <Button
+              key={"lg"}
+              bg="#383434"
+              size={"lg"}
+              style={styles.button}
+              _pressed={{ bg: "gray.800" }}
+              onPress={storeData("symptom")}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <View style={{ margin: 0 }}>
                   <Image source={require("../images/symptom_icon.png")} style={styles.iconImage} />
@@ -73,7 +80,13 @@ export function Home() {
         {/* Track medication button */}
         <View>
           <Box alignItems="center">
-            <Button key={"lg"} bg="#383434" size={"lg"} style={styles.button} _pressed={{ bg: "gray.800" }}>
+            <Button
+              key={"lg"}
+              bg="#383434"
+              size={"lg"}
+              style={styles.button}
+              _pressed={{ bg: "gray.800" }}
+              onPress={storeData("medication")}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <View style={{ margin: 0 }}>
                   <Image source={require("../images/medication_icon.png")} style={styles.iconImage} />
@@ -91,8 +104,6 @@ export function Home() {
           </Box>
         </View>
       </View>
-      {/* <View style = {{marginTop: '8%'}}>
-            </View> */}
 
       {/* Track activity button */}
       <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -102,7 +113,13 @@ export function Home() {
       </View>
       <View>
         <Box alignItems="center">
-          <Button key={"lg"} bg="#383434" size={"lg"} style={styles.button} _pressed={{ bg: "gray.800" }}>
+          <Button
+            key={"lg"}
+            bg="#383434"
+            size={"lg"}
+            style={styles.button}
+            _pressed={{ bg: "gray.800" }}
+            onPress={storeData("activity")}>
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <View style={{ margin: 0 }}>
                 <Image source={require("../images/exercise_icon.png")} style={styles.iconImage} />
