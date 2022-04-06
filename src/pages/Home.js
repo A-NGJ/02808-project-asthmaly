@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
 import { Button, Box } from "native-base";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { storeData } from "../utils/storeData";
 
 import {Obs} from '../constants/constants';
@@ -8,6 +9,24 @@ import FirebaseConn from '../connection/firestore';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
+Home.navigationOptions = ({ navigation }) => ({
+  tabBarLabel: "Home",
+  tabBarIcon: ({ color, size }) => (
+    <Icon
+      name="home-outline"
+      color={color}
+      size={size} />
+  ),
+  headerRight: () => (
+    <Icon
+      name="dots-vertical"
+      color={"#ffff"}
+      size={25}
+      onPress={() => navigation.navigate("Settings")}
+    />
+  ),
+});
 
 export function Home() {
     // From https://docs.nativebase.io/button
