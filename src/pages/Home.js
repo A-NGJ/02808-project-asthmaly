@@ -6,9 +6,6 @@ import { storeData } from "../utils/storeData";
 import {Obs} from '../constants/constants';
 import FirebaseConn from '../connection/firestore';
 
-import {Obs} from '../constants/constants';
-import FirebaseConn from '../connection/firestore';
-
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
