@@ -6,8 +6,11 @@ import { storeData } from "../utils/storeData";
 import {Obs} from '../constants/constants';
 import FirebaseConn from '../connection/firestore';
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+import {Obs} from '../constants/constants';
+import FirebaseConn from '../connection/firestore';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 Home.navigationOptions = ({ navigation }) => ({
   tabBarLabel: "Home",
@@ -51,60 +54,60 @@ export function Home() {
     </View>
 
 
-      {/* Track a symptom button */}
-      <View style={{flex: 1}}>
-      <View>
-          <Box alignItems="center">
-              <Button
-                key={'lg'} bg="#383434" size={'lg'}
-                style = {styles.button} _pressed={{bg: "gray.800"}}
-                onPress={() => firebaseConn.addObs(Obs.SYMPTOMS)}
-              >
-                  <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
-                      <View style={{margin: 0}}>
-                          <Image source={require('../images/symptom_icon.png')} style={styles.iconImage}/>
-                      </View>
-                      <View>
-                          <Text style={styles.buttonHeader}>
-                              Track Symptom
-                          </Text>
-                          <Text style={styles.buttonFooter}>
-                              Overall Asthma Symptoms
-                          </Text>
-                      </View>
-                  </View>
-              </Button>
-          </Box>
-      </View>
-      <View style = {{marginTop: '5%'}}>
-      </View>
+    {/* Track a symptom button */}
+    <View style={{flex: 1}}>
+    <View>
+        <Box alignItems="center">
+            <Button
+              key={'lg'} bg="#383434" size={'lg'}
+              style = {styles.button} _pressed={{bg: "gray.800"}}
+              onPress={() => firebaseConn.addObs(Obs.SYMPTOMS)}
+            >
+                <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                    <View style={{margin: 0}}>
+                        <Image source={require('../images/symptom_icon.png')} style={styles.iconImage}/>
+                    </View>
+                    <View>
+                        <Text style={styles.buttonHeader}>
+                            Track Symptom
+                        </Text>
+                        <Text style={styles.buttonFooter}>
+                            Overall Asthma Symptoms
+                        </Text>
+                    </View>
+                </View>
+            </Button>
+        </Box>
+    </View>
+    <View style = {{marginTop: '5%'}}>
+    </View>
 
-      {/* Track medication button */}
-      <View>
-          <Box alignItems="center">
-              <Button key={'lg'} bg="#383434" size={'lg'}
-                style = {styles.button} _pressed={{bg: "gray.800"}}
-                onPress={() => firebaseConn.addObs(Obs.MEDICATION)}
-              >
-                  <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
-                      <View style={{margin: 0}}>
-                          <Image source={require('../images/medication_icon.png')} style={styles.iconImage}/>
-                      </View>
-                      <View>
-                      <Text style={styles.buttonHeader}>
-                          Track Medication
-                      </Text>
-                      <Text style={styles.buttonFooter}>
-                          Preventative or Acute Medication
-                      </Text>
-                      </View>
-                  </View>
-              </Button>
-          </Box>
-      </View>
-      </View>
-      {/* <View style = {{marginTop: '8%'}}>
-      </View> */}
+    {/* Track medication button */}
+    <View>
+        <Box alignItems="center">
+            <Button key={'lg'} bg="#383434" size={'lg'}
+              style = {styles.button} _pressed={{bg: "gray.800"}}
+              onPress={() => firebaseConn.addObs(Obs.MEDICATION)}
+            >
+                <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                    <View style={{margin: 0}}>
+                        <Image source={require('../images/medication_icon.png')} style={styles.iconImage}/>
+                    </View>
+                    <View>
+                    <Text style={styles.buttonHeader}>
+                        Track Medication
+                    </Text>
+                    <Text style={styles.buttonFooter}>
+                        Preventative or Acute Medication
+                    </Text>
+                    </View>
+                </View>
+            </Button>
+        </Box>
+    </View>
+    </View>
+    {/* <View style = {{marginTop: '8%'}}>
+    </View> */}
 
       {/* Track activity button */}
       <View style={{ justifyContent: "center", alignItems: "center" }}>
