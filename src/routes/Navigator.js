@@ -43,7 +43,7 @@ export function TabNavigator() {
       />
       <Tab.Screen
         name="Visualization"
-        component={TopTabNavigator}
+        component={VisTopTabNavigator}
         options={Visualization.navigationOptions}
       />
       <Tab.Screen
@@ -75,11 +75,30 @@ export function NavProfile() {
   );
 }
 
-export function TopTabNavigator() {
+export function VisTopTabNavigator() {
   return (
-    <TopTab.Navigator>
+    <TopTab.Navigator
+      tabBarOptions={{
+        labelStyle: {
+          fontSize: 12,
+          textTransform: "none",
+        },
+        tabStyle: {
+          height: 30,
+          minHeight: 10,
+          backgroundColor: "#706c6c",
+          borderRadius: 100,
+          margin: 10,
+          marginVertical: 10,
+          padding: 3,
+        },
+        renderIndicator: () => null,
+      }}
+    >
       <TopTab.Screen name="Symptoms" component={Visualization} />
       <TopTab.Screen name="Exercise" component={Visualization2} />
     </TopTab.Navigator>
   );
 }
+
+
