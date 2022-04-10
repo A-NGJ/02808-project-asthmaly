@@ -2,6 +2,7 @@ import * as React from "react";
 import { useTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { ProfileSettings } from "../pages/profile/Settings";
 import { Home } from "../pages/Home";
 import { Visualization } from "../pages/Visualization";
@@ -10,9 +11,11 @@ import { ProfileAccount } from "../pages/profile/Account";
 import ProfileDoctor from "../pages/profile/Doctor";
 import ProfileFeedbackSupport from "../pages/profile/FeedbackSupport";
 import ProfileAbout from "../pages/profile/About";
+import { Visualization2 } from "../pages/Visualization2";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
 export function TabNavigator() {
   const { colors } = useTheme();
@@ -40,7 +43,7 @@ export function TabNavigator() {
       />
       <Tab.Screen
         name="Visualization"
-        component={Visualization}
+        component={TopTabNavigator}
         options={Visualization.navigationOptions}
       />
       <Tab.Screen
@@ -69,5 +72,14 @@ export function NavProfile() {
                     options={{ title: "Feedback & Support" }} />
       <Stack.Screen name="ProfileAbout" component={ProfileAbout} options={{ title: "About" }} />
     </Stack.Navigator>
+  );
+}
+
+export function TopTabNavigator() {
+  return (
+    <TopTab.Navigator>
+      <TopTab.Screen name="Symptoms" component={Visualization} />
+      <TopTab.Screen name="Exercise" component={Visualization2} />
+    </TopTab.Navigator>
   );
 }
