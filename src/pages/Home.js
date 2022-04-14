@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState, useEffect} from "react";
 import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
 import { Button, Box } from "native-base";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -28,9 +28,16 @@ Home.navigationOptions = ({ navigation }) => ({
   ),
 });
 
-export function Home() {
+export function Home(){
     // From https://docs.nativebase.io/button
+    const [name, setName] = useState('');
+    const [symptoms, setSymptoms] = useState('');
     const firebaseConn = new FirebaseConn();
+    useEffect(() => {
+      firebaseConn.getName(setName)
+      firebaseConn.getSymptoms(setSymptoms)
+    })
+
     return (
         <View style={{height: windowHeight, width: windowWidth, margin: 5, flex: 1}}>
             {/* Profile info */}
@@ -38,10 +45,10 @@ export function Home() {
                 <Image source={require('../images/anne_nielsen_profile_picture.png')} style={styles.profilePicture} />
             </View>
             <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
-                <Text style={styles.maintext}>Anne Nielsen</Text>
+                <Text style={styles.maintext}>{name}</Text>
             </View>
             <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
-                <Text style={styles.emailText}>anne_n@gmail.com</Text>
+                <Text style={styles.emailText}>{symptoms}</Text>
             </View>
 
       {/* Buttons and text fields */}
