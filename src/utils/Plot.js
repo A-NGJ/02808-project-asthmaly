@@ -7,7 +7,7 @@ import {darkAndBlack} from '../utils/PlotTheme';
 
 // Function to output an object with days as properties and number of observations for each day as values
 function GetDateDays(dates) {
-  const datetimes_byday = new Object();
+  var datetimes_byday = new Object();
   
   for (var i = 0; i < datetimes.length; i++) {
     var day = datetimes[i].getDate().toString();  // Get day number and convert to string
@@ -16,7 +16,7 @@ function GetDateDays(dates) {
       // Initialize property if day has not yet been observed
       datetimes_byday[day] = 1;
     }
-    
+
     else {
       // Increment if day has been observed
       datetimes_byday[day] += 1;
@@ -26,15 +26,38 @@ function GetDateDays(dates) {
 }
 
 
+// Function to output an object with hours as properties and number of observations for each hour as values
+function GetDateHours(dates) {
+  var datetimes_byhour = new Object();
+  
+  for (var i = 0; i < datetimes.length; i++) {
+    var hour = datetimes[i].getHours().toString();  // Get hour and convert to string
+    console.log(hour)
+
+    if (hour in datetimes_byhour  === false) {
+      // Initialize property if hour has not yet been observed
+      datetimes_byhour[hour] = 1;
+    }
+    
+    else {
+      // Increment if hour has been observed
+      datetimes_byhour[hour] += 1;
+    }
+  }
+  return datetimes_byhour
+}
+
+
 // How to generate the date of when the button was pressed. Contains year, month, day, hours, minutes and seconds. Maybe also timezone
 // const datetime = [new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds())]
 const datetimes = [new Date(1618420117245), new Date(1618420717245), new Date(1618421317245), new Date(1618430117245),
                    new Date(1618620117245), new Date(1618720717245), new Date(1618821317245), new Date(1618930117245)]
-console.log(datetimes);
 
-console.log("get every day");
 var datetimes_byday = GetDateDays(datetimes);
 console.log(datetimes_byday);
+
+var datetimes_byhour = GetDateHours(datetimes);
+console.log(datetimes_byhour);
 
 // Sort the data point by hour and by date and insert them into an object for easy plotting.
 
