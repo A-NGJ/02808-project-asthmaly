@@ -5,6 +5,18 @@ import { VictoryBar, VictoryChart, VictoryStack, VictoryAxis, VictoryLegend, Vic
 import {darkAndBlack} from '../utils/PlotTheme';
 
 
+function make_data_helper(dates, x_name, y_name) {
+  var datalist = [];
+  for (const key in dates) {
+    const value = dates[key];
+    var observation = {[x_name]: key, [y_name]: value};
+    datalist.push(observation);
+  }
+
+  return datalist
+}
+
+
 // Function to output an object with days as properties and number of observations for each day as values
 function GetDateDays(dates) {
   var datetimes_byday = new Object();
@@ -22,7 +34,8 @@ function GetDateDays(dates) {
       datetimes_byday[day] += 1;
     }
   }
-  return datetimes_byday
+  var day_data = make_data_helper(datetimes_byday, "Days", "Counts");
+  return day_data
 }
 
 
@@ -32,7 +45,6 @@ function GetDateHours(dates) {
   
   for (var i = 0; i < datetimes.length; i++) {
     var hour = datetimes[i].getHours().toString();  // Get hour and convert to string
-    console.log(hour)
 
     if (hour in datetimes_byhour  === false) {
       // Initialize property if hour has not yet been observed
@@ -44,7 +56,8 @@ function GetDateHours(dates) {
       datetimes_byhour[hour] += 1;
     }
   }
-  return datetimes_byhour
+  var hour_data = make_data_helper(datetimes_byhour, "Hours", "Count");
+  return hour_data
 }
 
 
@@ -54,9 +67,11 @@ const datetimes = [new Date(1618420117245), new Date(1618420717245), new Date(16
                    new Date(1618620117245), new Date(1618720717245), new Date(1618821317245), new Date(1618930117245)]
 
 var datetimes_byday = GetDateDays(datetimes);
+console.log("The days:")
 console.log(datetimes_byday);
 
 var datetimes_byhour = GetDateHours(datetimes);
+console.log("The hours:")
 console.log(datetimes_byhour);
 
 // Sort the data point by hour and by date and insert them into an object for easy plotting.
@@ -107,12 +122,13 @@ export function plot(figsize_x, figsize_y) {
       />
       <VictoryStack>
         <VictoryBar
-          data={data2012}
-          x="quarter"
-          y="earnings"
+          // data={data2012}
+          data={datetimes_byday}
+          x="days"
+          y="counts"
           barRatio={barRatio}
         />
-        <VictoryBar
+        {/* <VictoryBar
           data={data2013}
           x="quarter"
           y="earnings"
@@ -123,7 +139,7 @@ export function plot(figsize_x, figsize_y) {
           x="quarter"
           y="earnings"
           barRatio={barRatio}
-        />
+        /> */}
       </VictoryStack>
       <VictoryLegend
         data={[
