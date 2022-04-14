@@ -9,3 +9,9 @@ export class IconType {
    static MEDICATION = 'medications'
    static ACTIVITY = 'activity'
  }
+
+ export class Field {
+   static NAME = 'name'
+   static PHONE = 'phone'
+   static EMAIL = 'email'
+ }

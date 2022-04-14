@@ -2,13 +2,14 @@ import React, {useState, useEffect} from "react";
 import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
 import { Button, Box } from "native-base";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { storeData } from "../utils/storeData";
 
 import {Obs} from '../constants/constants';
 import FirebaseConn from '../connection/firestore';
+import { useIsFocused } from "@react-navigation/native";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
 
 Home.navigationOptions = ({ navigation }) => ({
   tabBarLabel: "Home",
@@ -29,14 +30,24 @@ Home.navigationOptions = ({ navigation }) => ({
 });
 
 export function Home(){
+  const firebaseConn = new FirebaseConn();
     // From https://docs.nativebase.io/button
-    const [name, setName] = useState('');
-    const [symptoms, setSymptoms] = useState('');
-    const firebaseConn = new FirebaseConn();
-    useEffect(() => {
-      firebaseConn.getName(setName)
-      firebaseConn.getSymptoms(setSymptoms)
-    })
+  const isFocused = useIsFocused();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [symptoms, setSymptoms] = useState('');
+  useEffect(() => {
+    const fetchFirebase = async () => {
+      const name = await firebaseConn.getName();
+      const email = await firebaseConn.getEmail();
+      const symptoms = await firebaseConn.getSymptoms();
+      setSymptoms(symptoms);
+      setName(name);
+      setEmail(email)
+    }
+    fetchFirebase();
+  }, [isFocused])
 
     return (
         <View style={{height: windowHeight, width: windowWidth, margin: 5, flex: 1}}>
@@ -48,7 +59,7 @@ export function Home(){
                 <Text style={styles.maintext}>{name}</Text>
             </View>
             <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
-                <Text style={styles.emailText}>{symptoms}</Text>
+                <Text style={styles.emailText}>{email}</Text>
             </View>
 
       {/* Buttons and text fields */}
@@ -127,7 +138,7 @@ export function Home(){
             size={"lg"}
             style={styles.button}
             _pressed={{ bg: "gray.800" }}
-            onPress={storeData("activity")}>
+            onPress={() => firebaseConn.addObs(Obs.ACTIVITY)}>
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <View style={{ margin: 0 }}>
                 <Image source={require("../images/exercise_icon.png")} style={styles.iconImage} />
