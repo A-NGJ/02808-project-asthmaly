@@ -66,13 +66,27 @@ function GetDateHours(dates) {
 const datetimes = [new Date(1618420117245), new Date(1618420717245), new Date(1618421317245), new Date(1618430117245),
                    new Date(1618620117245), new Date(1618720717245), new Date(1618821317245), new Date(1618930117245)]
 
-var datetimes_byday = GetDateDays(datetimes);
-console.log("The days:")
-console.log(datetimes_byday);
+// var datetimes_byday = GetDateDays(datetimes);
+// console.log("The days:")
+// console.log(datetimes_byday);
 
-var datetimes_byhour = GetDateHours(datetimes);
-console.log("The hours:")
-console.log(datetimes_byhour);
+const datetimes_byhour = GetDateHours(datetimes);
+// console.log("The hours:")
+// console.log(datetimes_byhour);
+
+const datetimes_byhour2 = [
+    {Hours: 1, Count: 2},
+    {Hours: 13, Count: 3},
+    {Hours: 14, Count: 4},
+    {Hours: 18, Count: 5}
+  ];
+
+const datetimes_byhour3 = [
+    {Hours: 1, Count: 1},
+    {Hours: 2, Count: 1},
+    {Hours: 3, Count: 1},
+    {Hours: 4, Count: 1}
+  ];
 
 // Sort the data point by hour and by date and insert them into an object for easy plotting.
 
@@ -123,23 +137,23 @@ export function plot(figsize_x, figsize_y) {
       <VictoryStack>
         <VictoryBar
           // data={data2012}
-          data={datetimes_byday}
-          x="days"
-          y="counts"
-          barRatio={barRatio}
-        />
-        {/* <VictoryBar
-          data={data2013}
-          x="quarter"
-          y="earnings"
+          data={datetimes_byhour}
+          x="Hours"
+          y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={data2014}
-          x="quarter"
-          y="earnings"
+          data={datetimes_byhour2}
+          x="Hours"
+          y="Count"
           barRatio={barRatio}
-        /> */}
+        />
+        <VictoryBar
+          data={datetimes_byhour3}
+          x="Hours"
+          y="Count"
+          barRatio={barRatio}
+        />
       </VictoryStack>
       <VictoryLegend
         data={[
