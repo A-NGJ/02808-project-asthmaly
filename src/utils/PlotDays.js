@@ -2,7 +2,12 @@ import * as React from 'react';
 // import * as assign from 'assign';
 import {StyleSheet} from 'react-native';
 import { VictoryBar, VictoryChart, VictoryStack, VictoryAxis, VictoryLegend, VictoryLabel} from "victory-native";
-import {darkAndBlack} from '../utils/PlotTheme';
+import {darkAndBlack} from './PlotTheme';
+
+
+// Define all days and all hours for use in GetDateDays and GetDateHours
+const all_days = Array.from({length: 31}, (_, i) => (i + 1).toString());
+// console.log(all_days);
 
 
 function make_data_helper(dates, x_name, y_name) {
@@ -12,7 +17,6 @@ function make_data_helper(dates, x_name, y_name) {
     var observation = {[x_name]: key, [y_name]: value};
     datalist.push(observation);
   }
-
   return datalist
 }
 
@@ -21,43 +25,22 @@ function make_data_helper(dates, x_name, y_name) {
 function GetDateDays(dates) {
   var datetimes_byday = new Object();
   
+  // Initialize all day values
+  for (var all_day in all_days) {
+    // For some reason, this fix is needed even though the values go from 1 to 31 already
+    all_day = parseInt(all_day) + 1;
+    datetimes_byday[all_day.toString()] = 0;
+  }
+
   for (var i = 0; i < datetimes.length; i++) {
     var day = datetimes[i].getDate().toString();  // Get day number and convert to string
 
-    if (day in datetimes_byday  === false) {
-      // Initialize property if day has not yet been observed
-      datetimes_byday[day] = 1;
-    }
-
-    else {
-      // Increment if day has been observed
-      datetimes_byday[day] += 1;
-    }
+    // Increment if day has been observed
+    datetimes_byday[day] += 1;
   }
-  var day_data = make_data_helper(datetimes_byday, "Days", "Counts");
+  // console.log(datetimes_byday);
+  var day_data = make_data_helper(datetimes_byday, "Days", "Count");
   return day_data
-}
-
-
-// Function to output an object with hours as properties and number of observations for each hour as values
-function GetDateHours(dates) {
-  var datetimes_byhour = new Object();
-  
-  for (var i = 0; i < datetimes.length; i++) {
-    var hour = datetimes[i].getHours().toString();  // Get hour and convert to string
-
-    if (hour in datetimes_byhour  === false) {
-      // Initialize property if hour has not yet been observed
-      datetimes_byhour[hour] = 1;
-    }
-    
-    else {
-      // Increment if hour has been observed
-      datetimes_byhour[hour] += 1;
-    }
-  }
-  var hour_data = make_data_helper(datetimes_byhour, "Hours", "Count");
-  return hour_data
 }
 
 
@@ -72,30 +55,22 @@ function daysInMonth (month, year) {
   return new Date(year, month, 0).getDate();
 }
 
-const all_hours = Array.from({length: 24}, (_, i) => (i + 1).toString());
-const all_days = Array.from({length: 31}, (_, i) => (i + 1).toString());
-// console.log(all_hours);
-
-// var datetimes_byday = GetDateDays(datetimes);
-// console.log("The days:")
-// console.log(datetimes_byday);
-
-const datetimes_byhour = GetDateHours(datetimes);
-// console.log("The hours:")
-// console.log(datetimes_byhour);
+const datetimes_byday = GetDateDays(datetimes);
+console.log("The days:")
+console.log(datetimes_byday);
 
 const datetimes_byhour2 = [
-    {Hours: 1, Count: 2},
-    {Hours: 13, Count: 3},
-    {Hours: 14, Count: 4},
-    {Hours: 18, Count: 5}
+    {Hours: 1, Count: 1},
+    {Hours: 13, Count: 1},
+    {Hours: 14, Count: 1},
+    {Hours: 18, Count: 1}
   ];
 
 const datetimes_byhour3 = [
-    {Hours: 1, Count: 1},
-    {Hours: 2, Count: 1},
-    {Hours: 3, Count: 1},
-    {Hours: 4, Count: 1}
+    {Hours: 1, Count: 2},
+    {Hours: 2, Count: 2},
+    {Hours: 3, Count: 2},
+    {Hours: 4, Count: 2}
   ];
 
 // Sort the data point by hour and by date and insert them into an object for easy plotting.
@@ -124,7 +99,7 @@ const datetimes_byhour3 = [
 
 var barRatio = 1.0
 
-export function plot(figsize_x, figsize_y) {
+export function plotDays(figsize_x, figsize_y) {
   return (
     <VictoryChart
       domainPadding={20}
@@ -135,32 +110,31 @@ export function plot(figsize_x, figsize_y) {
     >
       <VictoryAxis
         tickValues={[1, 2, 3, 4]}
-        tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
+        tickFormat={all_days}
       />
       <VictoryAxis
         dependentAxis
         style={{
           grid: { stroke: '#F4F5F7', strokeWidth: 1 },
         }}
-        tickFormat={(x) => (`$${x / 1000}k`)}
+        tickFormat={(x) => (`${x}`)}
       />
       <VictoryStack>
         <VictoryBar
-          // data={data2012}
-          data={datetimes_byhour}
-          x="Hours"
+          data={datetimes_byday}
+          x="Days"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
           data={datetimes_byhour2}
-          x="Hours"
+          x="Days"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
           data={datetimes_byhour3}
-          x="Hours"
+          x="Days"
           y="Count"
           barRatio={barRatio}
         />

@@ -1,7 +1,8 @@
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {plot} from '../utils/Plot';
+import {plotHours} from '../utils/PlotHours';
+import {plotDays} from '../utils/PlotDays';
 
 Visualization.navigationOptions = ({ navigation }) => ({
   tabBarLabel: "Visualization",
@@ -31,21 +32,21 @@ export function Visualization() {
     <View style={{top: 10, left: 10}}>
       {/* Fist plot */}
       <View>
-        <Text style={styles.maintext}>NUMBER OF SYMPTOMS BY DATE</Text>
+        <Text style={styles.maintext}>SYMPTOMS PER TYPE OF EXERCISE</Text>
       </View>
       <View style={{top: -20, right: 20, justifyContent: 'center', alignItems: 'center'}}>
         <View style={styles.plot1}>
-          {plot(plot_x, plot_y)}
+          {plotHours(plot_x, plot_y)}
         </View>
       </View>
 
       {/* Second plot */}
       <View style={{top: -60}}>
-        <Text style={styles.maintext}>NUMBER OF SYMPTOMS BY HOUR</Text>
+        <Text style={styles.maintext}>NUMBER OF SYMPTOMS WHILE EXERCISING</Text>
       </View>
       <View style={{top: -80, right: 20, justifyContent: 'center', alignItems: 'center'}}>
         <View style={styles.plot1}>
-          {plot(plot_x, plot_y)}
+          {plotHours(plot_x, plot_y)}
         </View>
       </View>
     </View>
