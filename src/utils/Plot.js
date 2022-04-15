@@ -66,6 +66,16 @@ function GetDateHours(dates) {
 const datetimes = [new Date(1618420117245), new Date(1618420717245), new Date(1618421317245), new Date(1618430117245),
                    new Date(1618620117245), new Date(1618720717245), new Date(1618821317245), new Date(1618930117245)]
 
+
+// Get the number of days in a certain month for x-axis in plot
+function daysInMonth (month, year) {
+  return new Date(year, month, 0).getDate();
+}
+
+const all_hours = Array.from({length: 24}, (_, i) => (i + 1).toString());
+const all_days = Array.from({length: 31}, (_, i) => (i + 1).toString());
+// console.log(all_hours);
+
 // var datetimes_byday = GetDateDays(datetimes);
 // console.log("The days:")
 // console.log(datetimes_byday);
