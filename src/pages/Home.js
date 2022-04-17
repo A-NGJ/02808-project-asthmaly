@@ -1,13 +1,14 @@
-import * as React from "react";
+import React, {useState, useEffect} from "react";
 import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
 import { Button, Box } from "native-base";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { storeData } from "../utils/storeData";
 import {Obs} from '../constants/constants';
 import FirebaseConn from '../connection/firestore';
+import { useIsFocused } from "@react-navigation/native";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
 
 Home.navigationOptions = ({ navigation }) => ({
   tabBarLabel: "Home",
@@ -27,21 +28,38 @@ Home.navigationOptions = ({ navigation }) => ({
   ),
 });
 
-export function Home() {
-  // From https://docs.nativebase.io/button
+export function Home(){
   const firebaseConn = new FirebaseConn();
-  return (
-    <View style={{ height: windowHeight, width: windowWidth, margin: 5, flex: 1 }}>
+    // From https://docs.nativebase.io/button
+  const isFocused = useIsFocused();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [symptoms, setSymptoms] = useState('');
+  useEffect(() => {
+    const fetchFirebase = async () => {
+      const name = await firebaseConn.getName();
+      const email = await firebaseConn.getEmail();
+      const symptoms = await firebaseConn.getSymptoms();
+      setSymptoms(symptoms);
+      setName(name);
+      setEmail(email)
+    }
+    fetchFirebase();
+  }, [isFocused])
+
+    return (
+    <View style={{height: windowHeight, width: windowWidth, margin: 5, flex: 1}}>
       {/* Profile info */}
-      <View style={{ top: "5%", justifyContent: "center", alignItems: "center" }}>
-        <Image source={require("../images/anne_nielsen_profile_picture.png")} style={styles.profilePicture} />
+      <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
+        <Image source={require('../images/anne_nielsen_profile_picture.png')} style={styles.profilePicture} />
       </View>
-      <View style={{ top: "5%", justifyContent: "center", alignItems: "center" }}>
-        <Text style={styles.maintext}>Anne Nielsen</Text>
+      <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={styles.maintext}>{name}</Text>
       </View>
-      <View style={{ top: "5%", justifyContent: "center", alignItems: "center" }}>
-        <Text style={styles.emailText}>anne_n@gmail.com</Text>
-      </View>
+      <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={styles.emailText}>{email}</Text>
+    </View>
 
     {/* Buttons and text fields */}
     <View style={{ top: "21%", justifyContent: "center", alignItems: "center" }}>
@@ -120,7 +138,7 @@ export function Home() {
             size={"lg"}
             style={styles.button}
             _pressed={{ bg: "gray.800" }}
-            onPress={storeData("activity")}>
+            onPress={() => firebaseConn.addObs(Obs.ACTIVITY)}>
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <View style={{ margin: 0 }}>
                 <Image source={require("../images/exercise_icon.png")} style={styles.iconImage} />
