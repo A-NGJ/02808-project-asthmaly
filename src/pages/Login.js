@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 import { Box, Button, Center, FormControl, Heading, Input, Link, VStack, Icon } from "native-base";
 import MaterialIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -69,6 +69,10 @@ export function Login() {
           </Box>
         </Center>
       </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>OR</Text>
+        <Text style={styles.text}>Log in with</Text>
+      </View>
     </View>
   );
 }
@@ -82,7 +86,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: -150,
   },
   image: {
     borderRadius: 100,
@@ -92,7 +95,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
-    marginTop: -250,
+    marginTop: -100,
   },
   headerContainer: {
     alignItems: "center",
@@ -112,5 +115,14 @@ const styles = StyleSheet.create({
     width: 203.41,
     height: 49.21,
     backgroundColor: "#262626",
+  },
+  textContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: -50,
+  },
+  text: {
+    color: "#ffff",
   },
 });
