@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { Box, Button, Center, FormControl, Heading, Input, Link, VStack, Icon, Stack } from "native-base";
 import MaterialIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 export function Login() {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   return (
     <View>
       <View style={styles.imageContainer}>
