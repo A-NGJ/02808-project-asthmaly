@@ -6,6 +6,9 @@ export function Login() {
 
   return (
     <View>
+      <View style={styles.container}>
+        <Image source={require("../images/login_img.png")} style={styles.image} />
+      </View>
       <Center w="100%">
         <Box safeArea p="2" py="8" w="90%" maxW="290">
           <Heading size="lg" fontWeight="600" color="coolGray.800" _dark={{
@@ -64,6 +67,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 200,
+    marginBottom: 60,
   },
   image: {
     borderRadius: 100,
