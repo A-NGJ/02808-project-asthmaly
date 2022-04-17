@@ -78,12 +78,14 @@ export function NavProfile() {
 export function VisTopTabNavigator() {
   return (
     <TopTab.Navigator
-      tabBarOptions={{
-        labelStyle: {
+      screenOptions={{
+        tabBarLabelStyle: {
           fontSize: 12,
           textTransform: "none",
         },
-        tabStyle: {
+        tabBarItemStyle: {
+          fontSize: 12,
+          textTransform: "none",
           height: 30,
           minHeight: 10,
           backgroundColor: "#706c6c",
@@ -92,7 +94,10 @@ export function VisTopTabNavigator() {
           marginVertical: 10,
           padding: 3,
         },
-        renderIndicator: () => null,
+        tabBarStyle: {
+          backgroundColor: "transparent",
+        },
+        tabBarIndicator: () => null,
       }}
     >
       <TopTab.Screen name="Symptoms" component={Visualization} />
