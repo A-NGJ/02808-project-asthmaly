@@ -34,6 +34,7 @@ export function Login() {
                 <Input
                   size="md"
                   h="50px"
+                  color="#ffff" fkgjfkgj
                   placeholder="E-mail"
                   InputLeftElement={<Icon as={<MaterialIcons name="email" />} size={5} ml="2" color="muted.400" />}
                   style={styles.input} />
@@ -42,6 +43,7 @@ export function Login() {
                 <Input
                   size="md"
                   h="50px"
+                  color="#ffff"
                   placeholder="Password"
                   type={show ? "text" : "password"}
                   InputLeftElement={<Icon as={<MaterialIcons name="lock" />} size={5} ml="2" color="muted.400" />}
