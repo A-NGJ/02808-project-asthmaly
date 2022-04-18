@@ -1,10 +1,11 @@
 import { useTheme } from "@react-navigation/native";
-import React from "react";
-import { View, TextInput, Settings } from "react-native";
+import React, { useEffect } from "react";
+import { View, TextInput, Settings, Alert } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { profileStyles, IconButton } from "./Profile";
-import { IconType } from "../../constants/constants";
+import { Field, IconType } from "../../constants/constants";
 import { RoundedButton } from "../../components/buttons";
+import FirebaseConn from "../../connection/firestore";
 
 function IconTextInput(colors, iconName, input, setInput, {
   textContentType = null,
@@ -32,19 +33,30 @@ function IconTextInput(colors, iconName, input, setInput, {
 }
 
 export function ProfileAccount() {
+  const firebaseConn = new FirebaseConn();
   const { colors } = useTheme();
-  const [fullName, setName] = React.useState(Settings.get("name"));
+  const [fullName, setName] = React.useState(firebaseConn.get("name"));
   const [email, setEmail] = React.useState(Settings.get("email"));
   const [phone, setPhone] = React.useState(Settings.get("phone"));
 
+  useEffect(() => {
+    const fetchFirebase = async () => {
+      const name = await firebaseConn.getName();
+      const email = await firebaseConn.getEmail();
+      const phone = await firebaseConn.getPhone();
+      setName(name);
+      setEmail(email);
+      setPhone(phone);
+    }
+    fetchFirebase();
+  }, [])
+
   const onPressSave = () => {
-    const saveData = {
-      "name": fullName,
-      "email": email,
-      "phone": phone,
-    };
-    Settings.set(saveData);
-    console.log("Saved", saveData);
+    fullName != "" ?
+      firebaseConn.update(Field.NAME, fullName) :
+      Alert.alert("name cannot be empty");
+    firebaseConn.update(Field.PHONE, phone)
+    firebaseConn.update(Field.EMAIL, email);
   };
 
   return (
