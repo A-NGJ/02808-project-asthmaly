@@ -75,6 +75,9 @@ export function Login() {
         <Text style={styles.text}>OR</Text>
         <Text style={styles.text}>Log in with</Text>
       </View>
+      <View style={styles.loginOptionsContainer}>
+
+      </View>
     </View>
   );
 }
@@ -88,6 +91,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 30,
   },
   image: {
     borderRadius: 100,
@@ -97,7 +101,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
-    marginTop: -100,
+    marginTop: -60,
   },
   headerContainer: {
     alignItems: "center",
@@ -108,7 +112,7 @@ const styles = StyleSheet.create({
     borderColor: "red",
   },
   buttonContainer: {
-    marginTop: 40,
+    marginTop: 30,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -119,12 +123,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#262626",
   },
   textContainer: {
-    flex: 1,
+    flex: 0.5,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: -50,
+    marginTop: 100,
   },
   text: {
     color: "#ffff",
+  },
+  loginOptionsContainer: {
+    flex: 0.5,
   },
 });
