@@ -10,6 +10,14 @@ export function Login() {
       <View style={styles.imageContainer}>
         <Image source={require("../images/login_img.png")} style={styles.image} />
       </View>
+      <View style={styles.headerContainer}>
+        <Heading
+          size="lg"
+          fontWeight="600"
+          color="#ffff">
+          Login
+        </Heading>
+      </View>
       <View style={styles.formContainer}>
         <Center
           w="100%">
@@ -19,14 +27,6 @@ export function Login() {
             py="8"
             w="90%"
             maxW="290">
-            <View style={styles.headerContainer}>
-              <Heading
-                size="lg"
-                fontWeight="600"
-                color="#ffff">
-                Login
-              </Heading>
-            </View>
             <VStack
               space={3}
               mt="5">
@@ -71,12 +71,23 @@ export function Login() {
           </Box>
         </Center>
       </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>OR</Text>
-        <Text style={styles.text}>Log in with</Text>
+      <View style={styles.orTextContainer}>
+        <Text style={styles.OrText}>OR</Text>
+        <Text style={styles.OrText}>Log in with</Text>
       </View>
-      <View style={styles.loginOptionsContainer}>
-
+      <View style={styles.outerLoginOptionsContainer}>
+        <View style={styles.loginOptionsContainer}>
+          <View style={styles.circle}>
+            <Image source={require("../images/google.png")} style={styles.logoImage} />
+          </View>
+          <View style={styles.circle}>
+            <Image source={require("../images/apple.png")} style={styles.logoImage} />
+          </View>
+          <View style={styles.circle}>
+            <Image source={require("../images/facebook.png")} style={styles.logoImage} />
+          </View>
+        </View>
+        <Text style={styles.registerNowText}>Don't have an account? Register now</Text>
       </View>
     </View>
   );
@@ -101,11 +112,12 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
-    marginTop: -60,
+    marginTop: -20,
   },
   headerContainer: {
     alignItems: "center",
     justifyContent: "center",
+
     marginBottom: 40,
   },
   input: {
@@ -122,16 +134,40 @@ const styles = StyleSheet.create({
     height: 49.21,
     backgroundColor: "#262626",
   },
-  textContainer: {
+  orTextContainer: {
     flex: 0.5,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 100,
+    marginTop: 50,
   },
-  text: {
+  OrText: {
     color: "#ffff",
   },
-  loginOptionsContainer: {
+  outerLoginOptionsContainer: {
     flex: 0.5,
+    alignItems: "center",
+  },
+  loginOptionsContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "60%",
+  },
+  circle: {
+    height: 40,
+    width: 40,
+    borderRadius: 1000,
+    backgroundColor: "#262626",
+  },
+  logoImage: {
+    width: 25,
+    height: 25,
+    resizeMode: "contain",
+    marginLeft: 7,
+    marginTop: 7,
+  },
+  registerNowText: {
+    marginTop: 15,
+    color: "#ffff",
   },
 });
