@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   OrText: {
+    fontSize: 14,
     color: "#ffff",
   },
   outerLoginOptionsContainer: {
@@ -167,6 +168,7 @@ const styles = StyleSheet.create({
     marginTop: 7,
   },
   registerNowText: {
+    fontSize: 12,
     marginTop: 15,
     color: "#ffff",
   },
