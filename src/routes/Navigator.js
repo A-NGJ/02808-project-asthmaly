@@ -12,7 +12,7 @@ import { ProfileAccount } from "../pages/profile/Account";
 import ProfileDoctor from "../pages/profile/Doctor";
 import ProfileFeedbackSupport from "../pages/profile/FeedbackSupport";
 import ProfileAbout from "../pages/profile/About";
-import { Visualization2 } from "../pages/Visualization2";
+import { Visualization1 } from "../pages/Visualization1";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -141,7 +141,7 @@ export function VisTopTabNavigator() {
     <TopTab.Navigator
       tabBar={(props) => <TopTabBar {...props} />}>
       <TopTab.Screen name="Symptoms" component={Visualization} />
-      <TopTab.Screen name="Exercise" component={Visualization2} />
+      <TopTab.Screen name="Exercise" component={Visualization1} />
     </TopTab.Navigator>
   );
 }
