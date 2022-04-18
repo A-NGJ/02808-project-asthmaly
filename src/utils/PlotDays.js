@@ -7,7 +7,6 @@ import {darkAndBlack} from './PlotTheme';
 
 // Define all days and all hours for use in GetDateDays and GetDateHours
 const all_days = Array.from({length: 31}, (_, i) => (i + 1).toString());
-// console.log(all_days);
 
 
 function make_data_helper(dates, x_name, y_name) {
@@ -38,7 +37,6 @@ function GetDateDays(dates) {
     // Increment if day has been observed
     datetimes_byday[day] += 1;
   }
-  // console.log(datetimes_byday);
   var day_data = make_data_helper(datetimes_byday, "Days", "Count");
   return day_data
 }
@@ -56,8 +54,6 @@ function daysInMonth (month, year) {
 }
 
 const datetimes_byday = GetDateDays(datetimes);
-console.log("The days:")
-console.log(datetimes_byday);
 
 const datetimes_byhour2 = [
     {Hours: 1, Count: 1},
