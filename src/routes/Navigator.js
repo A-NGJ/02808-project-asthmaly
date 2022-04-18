@@ -48,7 +48,7 @@ export function TabNavigator() {
         options={Visualization.navigationOptions}
       />
       <Tab.Screen
-        name="Profile"
+        name="NavProfile"
         component={NavProfile}
         options={Profile.navigationOptions}
       />

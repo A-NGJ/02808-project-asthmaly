@@ -76,6 +76,7 @@ export function IconButton(data, colors, onPress) {
 
 Profile.navigationOptions = ({ navigation }) => ({
   tabBarLabel: "Profile",
+  title: "Profile",
   tabBarIcon: ({ color, size }) => (
     <MaterialCommunityIcons
       name="account-outline"
