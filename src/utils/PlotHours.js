@@ -107,6 +107,7 @@ export function plotHours(figsize_x, figsize_y) {
       <VictoryAxis
         tickValues={[1, 2, 3, 4]}
         tickFormat={all_hours}
+        fixLabelOverlap={true}
       />
       <VictoryAxis
         dependentAxis
@@ -114,6 +115,7 @@ export function plotHours(figsize_x, figsize_y) {
           grid: { stroke: '#F4F5F7', strokeWidth: 1 },
         }}
         tickFormat={(x) => (`${x}`)}
+        fixLabelOverlap={true}
       />
       <VictoryStack>
         <VictoryBar
