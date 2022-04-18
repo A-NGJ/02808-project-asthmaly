@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
-import { Box, Button, Center, FormControl, Heading, Input, Link, VStack, Icon } from "native-base";
+import { StyleSheet, View, Image, Text, Switch } from "react-native";
+import { Box, Button, Center, FormControl, Heading, Input, Link, VStack, Icon, HStack } from "native-base";
 import MaterialIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 export function Login() {
   const [show, setShow] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -50,14 +53,26 @@ export function Login() {
                   InputRightElement={<Icon as={<MaterialIcons name={show ? "eye" : "eye-off"} />} size={5}
                                            mr="2" color="muted.400" onPress={() => setShow(!show)} />}
                   style={styles.input} />
-                <Link
-                  _text={{
-                    fontSize: "xs",
-                    fontWeight: "500",
-                    color: "#ffff",
-                  }} alignSelf="flex-end" mt="1">
-                  Forgot Password?
-                </Link>
+                <View style={{ marginTop: 2 }}>
+                  <HStack alignItems="flex-start">
+                    <Switch
+                      style={{ transform: [{ scaleX: .6 }, { scaleY: .6 }] }}
+                      trackColor={{ false: "#ffff", true: "#ffff" }}
+                      thumbColor={isEnabled ? "#262626" : "#262626"}
+                      ios_backgroundColor="#ffff"
+                      onValueChange={toggleSwitch}
+                      value={isEnabled} />
+                    <Text style={styles.rememberMeText}>Remember me</Text>
+                  </HStack>
+                  <Link
+                    _text={{
+                      fontSize: "xs",
+                      fontWeight: "500",
+                      color: "#ffff",
+                    }} alignSelf="flex-end" mt="-6">
+                    Forgot Password?
+                  </Link>
+                </View>
               </FormControl>
               <View style={styles.buttonContainer}>
                 <Button
@@ -117,11 +132,15 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: "center",
     justifyContent: "center",
-
     marginBottom: 40,
   },
   input: {
     borderColor: "red",
+  },
+  rememberMeText: {
+    marginTop: 4,
+    fontSize: 13,
+    color: "#ffff",
   },
   buttonContainer: {
     marginTop: 30,
