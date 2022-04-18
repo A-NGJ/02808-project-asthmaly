@@ -1,9 +1,9 @@
 import * as React from 'react';
 // import * as assign from 'assign';
 import {StyleSheet} from 'react-native';
-import { VictoryBar, VictoryChart, VictoryStack, VictoryAxis, VictoryLegend, VictoryLabel} from "victory-native";
+import { VictoryBar, VictoryChart, VictoryStack, VictoryAxis, VictoryLegend, VictoryLabel, Background} from "victory-native";
 import {darkAndBlack} from './PlotTheme';
-
+import Colors from '../utils/color'
 
 // Define all days and all hours for use in GetDateDays and GetDateHours
 const all_days = Array.from({length: 31}, (_, i) => (i + 1).toString());
@@ -103,6 +103,10 @@ export function plotDays(figsize_x, figsize_y) {
       width={figsize_x}
       height={figsize_y}
       padding={{ top: 40, bottom: 80, left: 50, right: 120 }}
+      style={{
+        background: { fill: Colors.GRAY }
+      }}
+      backgroundComponent={<Background x={-40} y={30} width={figsize_x + 35} height={figsize_y - 60}/>}
     >
       <VictoryAxis
         tickFormat={all_days}

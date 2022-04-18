@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {plotHours} from '../utils/PlotHours';
 import {plotDays} from '../utils/PlotDays';
+import Colors from '../utils/color'
 
 Visualization.navigationOptions = ({ navigation }) => ({
   tabBarLabel: "Visualization",
