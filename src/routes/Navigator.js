@@ -1,7 +1,9 @@
 import * as React from "react";
+import { Text, View, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { ProfileSettings } from "../pages/profile/Settings";
 import { Home } from "../pages/Home";
 import { Visualization } from "../pages/Visualization";
@@ -10,9 +12,11 @@ import { ProfileAccount } from "../pages/profile/Account";
 import ProfileDoctor from "../pages/profile/Doctor";
 import ProfileFeedbackSupport from "../pages/profile/FeedbackSupport";
 import ProfileAbout from "../pages/profile/About";
+import { Visualization1 } from "../pages/Visualization1";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
 export function TabNavigator() {
   const { colors } = useTheme();
@@ -40,7 +44,7 @@ export function TabNavigator() {
       />
       <Tab.Screen
         name="Visualization"
-        component={Visualization}
+        component={VisTopTabNavigator}
         options={Visualization.navigationOptions}
       />
       <Tab.Screen
@@ -71,3 +75,75 @@ export function NavProfile() {
     </Stack.Navigator>
   );
 }
+
+function TopTabBar({ state, descriptors, navigation }) {
+  return (
+    <View style={{ flexDirection: "row", backgroundColor: "transparent" }}>
+      {state.routes.map((route, index) => {
+        const { options } = descriptors[route.key];
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+              ? options.title
+              : route.name;
+
+        const isFocused = state.index === index;
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: "tabPress",
+            target: route.key,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate(route.name);
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: "tabLongPress",
+            target: route.key,
+          });
+        };
+
+        return (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityState={isFocused ? { selected: true } : {}}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={{
+              flex: 1,
+              backgroundColor: isFocused ? "#9b3fbf" : "#706c6c",
+              fontSize: 12,
+              textTransform: "none",
+              height: 30,
+              borderRadius: 100,
+              margin: 7,
+              marginVertical: 10,
+              padding: 6,
+            }}
+          >
+            <Text style={{ alignSelf: "center", color: "white" }}>{label}</Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
+
+export function VisTopTabNavigator() {
+  return (
+    <TopTab.Navigator
+      tabBar={(props) => <TopTabBar {...props} />}>
+      <TopTab.Screen name="Symptoms" component={Visualization} />
+      <TopTab.Screen name="Exercise" component={Visualization1} />
+    </TopTab.Navigator>
+  );
+}
+
+

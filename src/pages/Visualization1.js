@@ -1,10 +1,10 @@
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {plotHours} from '../utils/PlotHours';
-import {plotDays} from '../utils/PlotDays';
+import { plotHours } from "../utils/PlotHours";
+import { plotDays } from "../utils/PlotDays";
 
-Visualization.navigationOptions = ({ navigation }) => ({
+Visualization1.navigationOptions = ({ navigation }) => ({
   tabBarLabel: "Visualization",
   tabBarIcon: ({ color, size }) => (
     <Icon
@@ -23,49 +23,50 @@ Visualization.navigationOptions = ({ navigation }) => ({
 });
 
 
-var plot_x = 375
-var plot_y = 350
+var plot_x = 375;
+var plot_y = 350;
 
 
-export function Visualization() {
+export function Visualization1() {
   return (
-    <View style={{top: 10, left: 10}}>
+    <View style={{ top: 10, left: 10 }}>
       {/* Fist plot */}
       <View>
         <Text style={styles.maintext}>SYMPTOMS PER TYPE OF EXERCISE</Text>
       </View>
-      <View style={{top: -20, right: 20, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ top: -20, right: 20, justifyContent: "center", alignItems: "center" }}>
         <View style={styles.plot1}>
           {plotHours(plot_x, plot_y)}
         </View>
       </View>
 
-      {/* Second plot */}
-      <View style={{top: -60}}>
+      {/* Second plot*/}
+      <View style={{ top: -60 }}>
         <Text style={styles.maintext}>NUMBER OF SYMPTOMS WHILE EXERCISING</Text>
       </View>
-      <View style={{top: -80, right: 20, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ top: -80, right: 20, justifyContent: "center", alignItems: "center" }}>
         <View style={styles.plot1}>
           {plotHours(plot_x, plot_y)}
         </View>
       </View>
     </View>
-  )};
+  );
+};
 
 
 const styles = StyleSheet.create({
   // General button design
   plot1: {
-      height: plot_x,
-      width: plot_y,
-      // width: '100%',
-      // aspectRatio: 350 / 75,
+    height: plot_x,
+    width: plot_y,
+    // width: '100%',
+    // aspectRatio: 350 / 75,
   },
   // Taken from Home.js, this probably should be in a shared file
-  maintext : {
-        fontSize: 18,
-        font: 'roboto',
-        color: "white",
-        // fontWeight: "bold",
-    },
+  maintext: {
+    fontSize: 18,
+    font: "roboto",
+    color: "white",
+    // fontWeight: "bold",
+  },
 });
