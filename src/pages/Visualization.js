@@ -43,6 +43,12 @@ export function Visualization() {
 }
 
 const styles = StyleSheet.create({
+  plotStyle: {
+    height: 375,
+    width: 350,
+    // width: '100%',
+    // aspectRatio: 350 / 75,
+  },
   plot1Container: {
     top: 10,
     left: 10,
@@ -52,13 +58,6 @@ const styles = StyleSheet.create({
     right: 20,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  // General button design
-  plotStyle: {
-    height: 375,
-    width: 350,
-    // width: '100%',
-    // aspectRatio: 350 / 75,
   },
   plot2Container: {
     top: -60,
