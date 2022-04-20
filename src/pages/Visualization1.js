@@ -25,7 +25,7 @@ Visualization1.navigationOptions = ({ navigation }) => ({
 
 
 var plot_x = 375;
-var plot_y = 350;
+var plot_y = 325;
 
 
 export function Visualization1() {
@@ -35,17 +35,17 @@ export function Visualization1() {
       <View>
         <Text style={styles.maintext}>SYMPTOMS PER TYPE OF EXERCISE</Text>
       </View>
-      <View style={{ top: -20, right: 20, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ top: -20, right: 34, justifyContent: "center", alignItems: "center" }}>
         <View style={styles.plot1}>
           {plotHours(plot_x, plot_y)}
         </View>
       </View>
 
       {/* Second plot*/}
-      <View style={{ top: -60 }}>
+      <View style={{ top: -80 }}>
         <Text style={styles.maintext}>NUMBER OF SYMPTOMS WHILE EXERCISING</Text>
       </View>
-      <View style={{ top: -80, right: 20, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ top: -100, right: 34, justifyContent: "center", alignItems: "center" }}>
         <View style={styles.plot1}>
           {plotHours(plot_x, plot_y)}
         </View>
