@@ -28,7 +28,7 @@ function make_data_helper(dates, x_name, y_name) {
 
 // Function to output an object with days as properties and number of observations for each day as values
 function GetDateDays(dates) {
-  let datetimes_byday = new Object();
+  let datetimes_byday = {};
 
   // Initialize all day values
   for (let all_day in all_days) {
@@ -44,8 +44,7 @@ function GetDateDays(dates) {
     datetimes_byday[day] += 1;
   }
   // console.log(datetimes_byday);
-  const day_data = make_data_helper(datetimes_byday, 'Days', 'Count');
-  return day_data;
+  return make_data_helper(datetimes_byday, 'Days', 'Count');
 }
 
 // How to generate the date of when the button was pressed. Contains year, month, day, hours, minutes and seconds. Maybe also timezone
