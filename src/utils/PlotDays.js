@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet} from 'react-native';
 import {
   VictoryAxis,
@@ -9,9 +9,7 @@ import {
   VictoryStack,
 } from 'victory-native';
 import {darkAndBlack} from './PlotTheme';
-import FirebaseConn from '../connection/firestore';
-import {useIsFocused} from '@react-navigation/native';
-import firestore from '@react-native-firebase/firestore';
+import {getSymptoms} from './GetSymptoms';
 
 // Define all days and all hours for use in GetDateDays and GetDateHours
 const all_days = Array.from({length: 31}, (_, i) => (i + 1).toString());
@@ -27,7 +25,7 @@ function make_data_helper(dates, x_name, y_name) {
 }
 
 // Function to output an object with days as properties and number of observations for each day as values
-function GetDateDays(dates) {
+export function GetDateDays(dates) {
   let dateTimes = {};
 
   // Initialize all day values
@@ -51,41 +49,11 @@ function daysInMonth(month, year) {
   return new Date(year, month, 0).getDate();
 }
 
-const datetimes_byhour2 = [
-  {Hours: 1, Count: 1},
-  {Hours: 13, Count: 1},
-  {Hours: 14, Count: 1},
-  {Hours: 18, Count: 1},
-];
-
-const datetimes_byhour3 = [
-  {Hours: 1, Count: 2},
-  {Hours: 2, Count: 2},
-  {Hours: 3, Count: 2},
-  {Hours: 4, Count: 2},
-];
-
-function getSymptoms() {
-  const firebaseConn = new FirebaseConn();
-  const [timestamps, setTimestamps] = useState([]);
-  const isFocused = useIsFocused();
-
-  useEffect(() => {
-    const fetchFirebase = async () => {
-      const symptoms = await firebaseConn.getSymptoms();
-      setTimestamps(symptoms);
-    };
-    return () => fetchFirebase();
-  }, [isFocused]);
-
-  const dateTimes = timestamps.map(x => new Date(x));
-
-  return GetDateDays(dateTimes);
-}
-
 export function plotDays(figsize_x, figsize_y) {
   const barRatio = 1.0;
-  const dateTimeByDay = getSymptoms();
+  let getFunc = getSymptoms();
+  const dateTimeByDay = getFunc.dateTimeByDay;
+  const dateTimeByHours = getFunc.dateTimeByHours;
 
   return (
     <VictoryChart
@@ -110,13 +78,13 @@ export function plotDays(figsize_x, figsize_y) {
           barRatio={barRatio}
         />
         <VictoryBar
-          data={datetimes_byhour2}
+          data={dateTimeByHours}
           x="Days"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={datetimes_byhour3}
+          data={dateTimeByHours}
           x="Days"
           y="Count"
           barRatio={barRatio}
