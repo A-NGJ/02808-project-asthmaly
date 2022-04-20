@@ -8,6 +8,7 @@ import Colors from '../utils/color'
 // Define all hours for use in GetDateHours
 const all_hours = Array.from({length: 24}, (_, i) => (i + 1).toString());
 
+// The function in this script makes it possible to create the second plot from the figma protype of the symptom window
 
 function make_data_helper(dates, x_name, y_name) {
   var datalist = [];
