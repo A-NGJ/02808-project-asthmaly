@@ -66,22 +66,14 @@ class FirebaseConn {
   async getMedication() {
     await this.get(Obs.MEDICATION);
     const medication = [];
-    this.state.user.medication.forEach(element =>
-      symptoms.push(
-        Date(element['seconds'] * 1000 + symptoms['nanoseconds'] / 1000000),
-      ),
-    );
+    this.state.user.medication.forEach(element => medication.push(element));
     return medication;
   }
 
   async getActivity() {
     await this.get(Obs.ACTIVITY);
     const activities = [];
-    this.state.user.activities.forEach(element =>
-      symptoms.push(
-        Date(element['seconds'] * 1000 + symptoms['nanoseconds'] / 1000000),
-      ),
-    );
+    this.state.user.activities.forEach(element => activities.push(element));
     return activities;
   }
 }
