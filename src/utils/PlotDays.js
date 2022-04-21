@@ -9,7 +9,8 @@ import {
   VictoryStack,
 } from 'victory-native';
 import {darkAndBlack} from './PlotTheme';
-import {getSymptoms} from './GetSymptoms';
+import {getData} from './GetData';
+import {Obs} from '../constants/constants';
 
 // Define all days and all hours for use in GetDateDays and GetDateHours
 const all_days = Array.from({length: 31}, (_, i) => (i + 1).toString());
@@ -51,9 +52,9 @@ function daysInMonth(month, year) {
 
 export function plotDays(figsize_x, figsize_y) {
   const barRatio = 1.0;
-  let getFunc = getSymptoms();
-  const dateTimeByDay = getFunc.dateTimeByDay;
-  const dateTimeByHours = getFunc.dateTimeByHours;
+  const getSymptoms = getData(Obs.SYMPTOMS);
+  const getMedication = getData(Obs.SYMPTOMS);
+  const getActivity = getData(Obs.SYMPTOMS);
 
   return (
     <VictoryChart
@@ -72,19 +73,19 @@ export function plotDays(figsize_x, figsize_y) {
       />
       <VictoryStack>
         <VictoryBar
-          data={dateTimeByDay}
+          data={getActivity.dateTimeByDay}
           x="Days"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={dateTimeByHours}
+          data={getMedication.dateTimeByDay}
           x="Days"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={dateTimeByHours}
+          data={getSymptoms.dateTimeByDay}
           x="Days"
           y="Count"
           barRatio={barRatio}
