@@ -9,7 +9,7 @@ import { SSRProvider } from "@react-aria/ssr";
 
 export default function App() {
   const scheme = useColorScheme();
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   return (
     <SSRProvider>
       <NativeBaseProvider>

@@ -24,7 +24,7 @@ Visualization.navigationOptions = ({ navigation }) => ({
 
 
 var plot_x = 375;
-var plot_y = 350;
+var plot_y = 325;
 
 
 export function Visualization() {
@@ -34,17 +34,17 @@ export function Visualization() {
       <View>
         <Text style={styles.maintext}>NUMBER OF SYMPTOMS BY DATE</Text>
       </View>
-      <View style={{ top: -20, right: 20, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ top: -20, right: 34, justifyContent: "center", alignItems: "center" }}>
         <View style={styles.plot1}>
           {plotDays(plot_x, plot_y)}
         </View>
       </View>
 
       {/* Second plot */}
-      <View style={{ top: -60 }}>
+      <View style={{ top: -80 }}>
         <Text style={styles.maintext}>NUMBER OF SYMPTOMS BY HOUR</Text>
       </View>
-      <View style={{ top: -80, right: 20, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ top: -100, right: 34, justifyContent: "center", alignItems: "center" }}>
         <View style={styles.plot1}>
           {plotHours(plot_x, plot_y)}
         </View>

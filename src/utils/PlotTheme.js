@@ -35,7 +35,7 @@ const colors = [
     fontFamily: sansSerif,
     fontSize,
     letterSpacing,
-    padding: 14,
+    padding: 10,
     fill: charcoal,
     stroke: "transparent"
   };

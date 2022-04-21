@@ -1,14 +1,14 @@
 import * as React from 'react';
 // import * as assign from 'assign';
 import {StyleSheet} from 'react-native';
-import { VictoryBar, VictoryChart, VictoryStack, VictoryAxis, VictoryLegend, VictoryLabel} from "victory-native";
+import { VictoryBar, VictoryChart, VictoryStack, VictoryAxis, VictoryLegend, VictoryLabel, Background} from "victory-native";
 import {darkAndBlack} from './PlotTheme';
-
+import Colors from '../utils/color'
 
 // Define all days and all hours for use in GetDateDays and GetDateHours
 const all_days = Array.from({length: 31}, (_, i) => (i + 1).toString());
-// console.log(all_days);
 
+// The function in this script makes it possible to create the first plot from the figma protype of the symptom window
 
 function make_data_helper(dates, x_name, y_name) {
   var datalist = [];
@@ -38,7 +38,6 @@ function GetDateDays(dates) {
     // Increment if day has been observed
     datetimes_byday[day] += 1;
   }
-  // console.log(datetimes_byday);
   var day_data = make_data_helper(datetimes_byday, "Days", "Count");
   return day_data
 }
@@ -56,8 +55,6 @@ function daysInMonth (month, year) {
 }
 
 const datetimes_byday = GetDateDays(datetimes);
-console.log("The days:")
-console.log(datetimes_byday);
 
 const datetimes_byhour2 = [
     {Hours: 1, Count: 1},
@@ -107,10 +104,15 @@ export function plotDays(figsize_x, figsize_y) {
       width={figsize_x}
       height={figsize_y}
       padding={{ top: 40, bottom: 80, left: 50, right: 120 }}
+      style={{
+        background: { fill: Colors.GRAY }
+      }}
+      backgroundComponent={<Background x={-40} y={30} width={figsize_x + 35} height={figsize_y - 60}/>}
     >
       <VictoryAxis
-        tickValues={[1, 2, 3, 4]}
         tickFormat={all_days}
+        fixLabelOverlap={true}
+        label="Days"
       />
       <VictoryAxis
         dependentAxis
@@ -118,6 +120,8 @@ export function plotDays(figsize_x, figsize_y) {
           grid: { stroke: '#F4F5F7', strokeWidth: 1 },
         }}
         tickFormat={(x) => (`${x}`)}
+        fixLabelOverlap={true}
+        label="Symptoms"
       />
       <VictoryStack>
         <VictoryBar
