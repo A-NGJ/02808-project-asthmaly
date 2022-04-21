@@ -1,11 +1,18 @@
 import * as React from 'react';
 import {StyleSheet} from 'react-native';
-import { VictoryBar, VictoryChart, VictoryStack, VictoryAxis, VictoryLegend, VictoryLabel, Background} from "victory-native";
+import {
+  VictoryBar,
+  VictoryChart,
+  VictoryStack,
+  VictoryAxis,
+  VictoryLegend,
+  VictoryLabel,
+  Background,
+} from 'victory-native';
 import {darkAndBlack} from './PlotTheme';
-import Colors from '../utils/color'
 import {getData} from './GetData';
 import {Obs} from '../constants/constants';
-import Colors from '../utils/color'
+import Colors from '../utils/color';
 
 // Define all hours for use in GetDateHours
 const all_hours = Array.from({length: 24}, (_, i) => (i + 1).toString());
@@ -59,12 +66,18 @@ export function plotHours(figsize_x, figsize_y) {
       theme={darkAndBlack}
       width={figsize_x}
       height={figsize_y}
-      padding={{ top: 40, bottom: 80, left: 50, right: 120 }}
+      padding={{top: 40, bottom: 80, left: 50, right: 120}}
       style={{
-        background: { fill: Colors.GRAY }
+        background: {fill: Colors.GRAY},
       }}
-      backgroundComponent={<Background x={-40} y={30} width={figsize_x + 35} height={figsize_y - 60}/>}
-    >
+      backgroundComponent={
+        <Background
+          x={-40}
+          y={30}
+          width={figsize_x + 35}
+          height={figsize_y - 60}
+        />
+      }>
       <VictoryAxis
         tickFormat={all_hours}
         fixLabelOverlap={true}
@@ -75,7 +88,7 @@ export function plotHours(figsize_x, figsize_y) {
         style={{
           grid: {stroke: '#F4F5F7', strokeWidth: 1},
         }}
-        tickFormat={(x) => (`${x}`)}
+        tickFormat={x => `${x}`}
         fixLabelOverlap={true}
         label="Symptoms"
       />

@@ -19,7 +19,7 @@ Visualization.navigationOptions = ({navigation}) => ({
 
 export function Visualization() {
   const plot_x = 375;
-  const plot_y = 350;
+  const plot_y = 325;
 
   return (
     <View style={styles.plot1Container}>
@@ -43,9 +43,9 @@ export function Visualization() {
 }
 
 const styles = StyleSheet.create({
-  plotStyle: {
+  plot1: {
     height: 375,
-    width: 350,
+    width: 325,
     // width: '100%',
     // aspectRatio: 350 / 75,
   },
