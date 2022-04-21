@@ -2,12 +2,12 @@ import * as React from 'react';
 // import * as assign from 'assign';
 import {StyleSheet} from 'react-native';
 import {
+  VictoryAxis,
   VictoryBar,
   VictoryChart,
-  VictoryStack,
-  VictoryAxis,
-  VictoryLegend,
   VictoryLabel,
+  VictoryLegend,
+  VictoryStack,
 } from 'victory-native';
 import {darkAndBlack} from './PlotTheme';
 
@@ -17,10 +17,10 @@ const all_hours = Array.from({length: 24}, (_, i) => (i + 1).toString());
 // console.log(all_days);
 
 function make_data_helper(dates, x_name, y_name) {
-  var datalist = [];
+  const datalist = [];
   for (const key in dates) {
     const value = dates[key];
-    var observation = {[x_name]: key, [y_name]: value};
+    const observation = {[x_name]: key, [y_name]: value};
     datalist.push(observation);
   }
   return datalist;
@@ -28,24 +28,23 @@ function make_data_helper(dates, x_name, y_name) {
 
 // Function to output an object with hours as properties and number of observations for each hour as values
 export function GetDateHours(dates) {
-  var datetimes_byhour = new Object();
+  const datetimes_byhour = {};
 
   // Initialize all hour values
-  for (var all_hour in all_hours) {
+  for (let all_hour in all_hours) {
     // For some reason, this fix is needed even though the values go from 1 to 24 already
     all_hour = parseInt(all_hour) + 1;
     datetimes_byhour[all_hour.toString()] = 0;
   }
 
   for (var i = 0; i < datetimes.length; i++) {
-    var hour = datetimes[i].getHours().toString(); // Get hour and convert to string
+    const hour = datetimes[i].getHours().toString(); // Get hour and convert to string
 
     // Increment if hour has been observed
     datetimes_byhour[hour] += 1;
   }
   // console.log(datetimes_byhour);
-  var hour_data = make_data_helper(datetimes_byhour, 'Hours', 'Count');
-  return hour_data;
+  return make_data_helper(datetimes_byhour, 'Hours', 'Count');
 }
 
 // How to generate the date of when the button was pressed. Contains year, month, day, hours, minutes and seconds. Maybe also timezone
@@ -108,9 +107,8 @@ const datetimes_byhour3 = [
 //   {quarter: 4, earnings: 15500}
 // ];
 
-var barRatio = 1.0;
-
 export function plotHours(figsize_x, figsize_y) {
+  const barRatio = 1.0;
   return (
     <VictoryChart
       domainPadding={20}
