@@ -7,13 +7,17 @@ import {
   VictoryLabel,
   VictoryLegend,
   VictoryStack,
+  Background,
 } from 'victory-native';
 import {darkAndBlack} from './PlotTheme';
 import {getData} from './GetData';
 import {Obs} from '../constants/constants';
+import Colors from '../utils/color'
 
 // Define all hours for use in GetDateHours
 const all_hours = Array.from({length: 24}, (_, i) => (i + 1).toString());
+
+// The function in this script makes it possible to create the second plot from the figma protype of the symptom window
 
 function make_data_helper(dates, x_name, y_name) {
   const datalist = [];
@@ -62,14 +66,25 @@ export function plotHours(figsize_x, figsize_y) {
       theme={darkAndBlack}
       width={figsize_x}
       height={figsize_y}
-      padding={{top: 40, bottom: 80, left: 50, right: 120}}>
-      <VictoryAxis tickValues={[1, 2, 3, 4]} tickFormat={all_hours} />
+      padding={{ top: 40, bottom: 80, left: 50, right: 120 }}
+      style={{
+        background: { fill: Colors.GRAY }
+      }}
+      backgroundComponent={<Background x={-40} y={30} width={figsize_x + 35} height={figsize_y - 60}/>}
+    >
+      <VictoryAxis
+        tickFormat={all_hours}
+        fixLabelOverlap={true}
+        label="Hours"
+      />
       <VictoryAxis
         dependentAxis
         style={{
           grid: {stroke: '#F4F5F7', strokeWidth: 1},
         }}
-        tickFormat={x => `${x}`}
+        tickFormat={(x) => (`${x}`)}
+        fixLabelOverlap={true}
+        label="Symptoms"
       />
       <VictoryStack>
         <VictoryBar

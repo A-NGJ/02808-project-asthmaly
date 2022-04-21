@@ -17,6 +17,7 @@ Visualization.navigationOptions = ({navigation}) => ({
   ),
 });
 
+
 export function Visualization() {
   const plot_x = 375;
   const plot_y = 350;
