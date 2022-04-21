@@ -49,6 +49,35 @@ function GetDateHours(dates) {
 const datetimes = [new Date(1618420117245), new Date(1618420717245), new Date(1618421317245), new Date(1618430117245),
                    new Date(1618620117245), new Date(1618720717245), new Date(1618821317245), new Date(1618930117245)]
 
+const dummy_data = [{timestamp: new Date(1618420117245), type: "Biking"},
+                   {timestamp: new Date(1618420717245), type: "Walking"},
+                   {timestamp: new Date(1618421317245), type: "Walking"},
+                   {timestamp: new Date(1618430117245), type: "Biking"},
+                   {timestamp: new Date(1618620117245), type: "Biking"},
+                   {timestamp: new Date(1618720717245), type: "Walking"},
+                   {timestamp: new Date(1618821317245), type: "Climbing"},
+                   {timestamp: new Date(1618930117245), type: "Climbing"},
+                   {timestamp: new Date(1618931187245), type: "Biking"}]
+
+let timestamps = dummy_data.map(a => a.timestamp);
+let types = dummy_data.map(a => a.type);
+let unique_types = Array.from(new Set(types));
+
+let byhour1 = new Object();
+let byhour2 = new Object();
+let byhour3 = new Object();
+
+// Initialize all hour values
+for (let all_hour of all_hours) {
+  // For some reason, this fix is needed even though the values go from 1 to 24 already
+  all_hour = parseInt(all_hour) + 1;
+  byhour1[all_hour.toString()] = 0;
+  byhour2[all_hour.toString()] = 0;
+  byhour3[all_hour.toString()] = 0;
+}
+
+
+// for (timestamp of )
 
 // Get the number of days in a certain month for x-axis in plot
 function daysInMonth (month, year) {
@@ -97,7 +126,7 @@ const datetimes_byhour3 = [
 
 var barRatio = 1.0
 
-export function plotHours(figsize_x, figsize_y) {
+export function plotExerciseHours(figsize_x, figsize_y) {
   return (
     <VictoryChart
       domainPadding={20}

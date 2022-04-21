@@ -48,7 +48,7 @@ export function Visualization1() {
       </View>
       <View style={{ top: -100, right: 34, justifyContent: "center", alignItems: "center" }}>
         <View style={styles.plot1}>
-          {plotHours(plot_x, plot_y)}
+          {plotExerciseHours(plot_x, plot_y)}
         </View>
       </View>
     </View>
