@@ -38,7 +38,7 @@ export function getData(dataType: Obs) {
       dateTimes = activity.map(x => new Date(x));
       break;
     default:
-      console.error('Choose data type to get!');
+      console.log('Choose data type to get!');
   }
 
   const dateTimeByDay = GetDateDays(dateTimes);
