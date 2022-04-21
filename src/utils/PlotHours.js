@@ -73,7 +73,6 @@ export function plotHours(figsize_x, figsize_y) {
       />
       <VictoryStack>
         <VictoryBar
-          // data={data2012}
           data={getActivity.dateTimeByHours}
           x="Hours"
           y="Count"
