@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import * as assign from 'assign';
 import {StyleSheet} from 'react-native';
 import {
   VictoryAxis,
@@ -14,8 +13,6 @@ import {darkAndBlack} from './PlotTheme';
 // Define all hours for use in GetDateHours
 const all_hours = Array.from({length: 24}, (_, i) => (i + 1).toString());
 
-// console.log(all_days);
-
 function make_data_helper(dates, x_name, y_name) {
   const datalist = [];
   for (const key in dates) {
@@ -28,23 +25,22 @@ function make_data_helper(dates, x_name, y_name) {
 
 // Function to output an object with hours as properties and number of observations for each hour as values
 export function GetDateHours(dates) {
-  const datetimes_byhour = {};
+  const dateTimes = {};
 
   // Initialize all hour values
   for (let all_hour in all_hours) {
     // For some reason, this fix is needed even though the values go from 1 to 24 already
     all_hour = parseInt(all_hour) + 1;
-    datetimes_byhour[all_hour.toString()] = 0;
+    dateTimes[all_hour.toString()] = 0;
   }
 
-  for (var i = 0; i < datetimes.length; i++) {
+  for (let i = 0; i < datetimes.length; i++) {
     const hour = datetimes[i].getHours().toString(); // Get hour and convert to string
 
     // Increment if hour has been observed
-    datetimes_byhour[hour] += 1;
+    dateTimes[hour] += 1;
   }
-  // console.log(datetimes_byhour);
-  return make_data_helper(datetimes_byhour, 'Hours', 'Count');
+  return make_data_helper(dateTimes, 'Hours', 'Count');
 }
 
 // How to generate the date of when the button was pressed. Contains year, month, day, hours, minutes and seconds. Maybe also timezone
@@ -66,8 +62,6 @@ function daysInMonth(month, year) {
 }
 
 const datetimes_byhour = GetDateHours(datetimes);
-// console.log("The hours:")
-//console.log(datetimes_byhour);
 
 const datetimes_byhour2 = [
   {Hours: 1, Count: 2},
@@ -82,30 +76,6 @@ const datetimes_byhour3 = [
   {Hours: 3, Count: 1},
   {Hours: 4, Count: 1},
 ];
-
-// Sort the data point by hour and by date and insert them into an object for easy plotting.
-
-// Old example data
-// const data2012 = [
-//   {quarter: 1, earnings: 13000},
-//   {quarter: 2, earnings: 16500},
-//   {quarter: 3, earnings: 14250},
-//   {quarter: 4, earnings: 19000}
-// ];
-
-// const data2013 = [
-//   {quarter: 1, earnings: 15000},
-//   {quarter: 2, earnings: 12500},
-//   {quarter: 3, earnings: 19500},
-//   {quarter: 4, earnings: 13000}
-// ];
-
-// const data2014 = [
-//   {quarter: 1, earnings: 11500},
-//   {quarter: 2, earnings: 13250},
-//   {quarter: 3, earnings: 20000},
-//   {quarter: 4, earnings: 15500}
-// ];
 
 export function plotHours(figsize_x, figsize_y) {
   const barRatio = 1.0;
