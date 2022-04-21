@@ -7,10 +7,6 @@ import Colors from './color'
 
 // The function in this script makes it possible to create the second plot from the figma protype of the exercise window
 
-// Define all hours for use in GetDateHours
-const all_hours = Array.from({length: 24}, (_, i) => (i + 1).toString());
-
-
 function make_data_helper(dates, x_name, y_name) {
   var datalist = [];
   for (const key in dates) {
@@ -21,83 +17,37 @@ function make_data_helper(dates, x_name, y_name) {
   return datalist
 }
 
+const dummy_data = [{timestamp: new Date(1618420117245), type: "Biking"},
+                    {timestamp: new Date(1618420717245), type: "Walking"},
+                    {timestamp: new Date(1618421317245), type: "Walking"},
+                    {timestamp: new Date(1618430117245), type: "Biking"},
+                    {timestamp: new Date(1618620117245), type: "Biking"},
+                    {timestamp: new Date(1618720717245), type: "Walking"},
+                    {timestamp: new Date(1618821317245), type: "Climbing"},
+                    {timestamp: new Date(1618930117245), type: "Climbing"},
+                    {timestamp: new Date(1618931187245), type: "Biking"}]
+// console.log(dummy_data[0]['timestamp'])
+// console.log(dummy_data[0]['type'])
 
-// Function to output an object with hours as properties and number of observations for each hour as values
-function GetDateHours(dates) {
-  var datetimes_byhour = new Object();
-  
-  // Initialize all hour values
-  for (var all_hour in all_hours) {
-    // For some reason, this fix is needed even though the values go from 1 to 24 already
-    all_hour = parseInt(all_hour) + 1;
-    datetimes_byhour[all_hour.toString()] = 0;
-  }
+let timestamps = dummy_data.map(a => a.timestamp);
+let types = dummy_data.map(a => a.type);
+let unique_types = Array.from(new Set(types));
+var exercise_number = new Object();
 
-  for (var i = 0; i < datetimes.length; i++) {
-    var hour = datetimes[i].getHours().toString();  // Get hour and convert to string
-    
-    // Increment if hour has been observed
-    datetimes_byhour[hour] += 1;
-  }
-  var hour_data = make_data_helper(datetimes_byhour, "Hours", "Count");
-  return hour_data
+for (const type of unique_types) {
+  exercise_number[type] = 0;
 }
 
 
-// How to generate the date of when the button was pressed. Contains year, month, day, hours, minutes and seconds. Maybe also timezone
-// const datetime = [new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds())]
-const datetimes = [new Date(1618420117245), new Date(1618420717245), new Date(1618421317245), new Date(1618430117245),
-                   new Date(1618620117245), new Date(1618720717245), new Date(1618821317245), new Date(1618930117245)]
-
-
-// Get the number of days in a certain month for x-axis in plot
-function daysInMonth (month, year) {
-  return new Date(year, month, 0).getDate();
+for (const type of types) {
+  exercise_number[type] += 1;
 }
 
-const datetimes_byhour = GetDateHours(datetimes);
+exercise_number = make_data_helper(exercise_number, "Exercise", "Count")
 
-const datetimes_byhour2 = [
-    {Hours: 1, Count: 2},
-    {Hours: 13, Count: 3},
-    {Hours: 14, Count: 4},
-    {Hours: 18, Count: 5}
-  ];
+// console.log(exercise_number);
 
-const datetimes_byhour3 = [
-    {Hours: 1, Count: 1},
-    {Hours: 2, Count: 1},
-    {Hours: 3, Count: 1},
-    {Hours: 4, Count: 1}
-  ];
-
-// Sort the data point by hour and by date and insert them into an object for easy plotting.
-
-// Old example data
-// const data2012 = [
-//   {quarter: 1, earnings: 13000},
-//   {quarter: 2, earnings: 16500},
-//   {quarter: 3, earnings: 14250},
-//   {quarter: 4, earnings: 19000}
-// ];
-
-// const data2013 = [
-//   {quarter: 1, earnings: 15000},
-//   {quarter: 2, earnings: 12500},
-//   {quarter: 3, earnings: 19500},
-//   {quarter: 4, earnings: 13000}
-// ];
-
-// const data2014 = [
-//   {quarter: 1, earnings: 11500},
-//   {quarter: 2, earnings: 13250},
-//   {quarter: 3, earnings: 20000},
-//   {quarter: 4, earnings: 15500}
-// ];
-
-var barRatio = 1.0
-
-export function plotHours(figsize_x, figsize_y) {
+export function plotExercises(figsize_x, figsize_y) {
   return (
     <VictoryChart
       domainPadding={20}
@@ -111,9 +61,9 @@ export function plotHours(figsize_x, figsize_y) {
       backgroundComponent={<Background x={-40} y={30} width={figsize_x + 35} height={figsize_y - 60}/>}
     >
       <VictoryAxis
-        tickFormat={all_hours}
+        tickFormat={unique_types}
         fixLabelOverlap={true}
-        label="Hours"
+        label="Exercise Type"
       />
       <VictoryAxis
         dependentAxis
@@ -126,34 +76,12 @@ export function plotHours(figsize_x, figsize_y) {
       />
       <VictoryStack>
         <VictoryBar
-          // data={data2012}
-          data={datetimes_byhour}
-          x="Hours"
+          data={exercise_number}
+          x="Exercise"
           y="Count"
-          barRatio={barRatio}
-        />
-        <VictoryBar
-          data={datetimes_byhour2}
-          x="Hours"
-          y="Count"
-          barRatio={barRatio}
-        />
-        <VictoryBar
-          data={datetimes_byhour3}
-          x="Hours"
-          y="Count"
-          barRatio={barRatio}
+          barWidth = {40}
         />
       </VictoryStack>
-      <VictoryLegend
-        data={[
-          { name: "Exercise" }, { name: "Medication" }, { name: "Symptom" }
-        ]}
-        title="Status"
-        labelComponent={<VictoryLabel angle={0}/>}
-        x={figsize_x-115} y={35}
-        rowGutter={{ top: 0, bottom: -5 }}
-      />
     </VictoryChart>
   )
 }

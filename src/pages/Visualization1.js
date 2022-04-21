@@ -2,7 +2,8 @@ import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {plotHours} from '../utils/PlotHours';
-import {plotDays} from '../utils/PlotDays';
+import {plotExerciseHours} from '../utils/PlotExerciseHours';
+import {plotExercises} from '../utils/PlotExercises';
 import Colors from '../utils/color'
 
 Visualization1.navigationOptions = ({ navigation }) => ({
@@ -37,7 +38,7 @@ export function Visualization1() {
       </View>
       <View style={{ top: -20, right: 34, justifyContent: "center", alignItems: "center" }}>
         <View style={styles.plot1}>
-          {plotHours(plot_x, plot_y)}
+          {plotExercises(plot_x, plot_y)}
         </View>
       </View>
 
