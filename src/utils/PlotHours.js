@@ -9,6 +9,8 @@ import {
   VictoryStack,
 } from 'victory-native';
 import {darkAndBlack} from './PlotTheme';
+import {getData} from './GetData';
+import {Obs} from '../constants/constants';
 
 // Define all hours for use in GetDateHours
 const all_hours = Array.from({length: 24}, (_, i) => (i + 1).toString());
@@ -79,6 +81,10 @@ const datetimes_byhour3 = [
 
 export function plotHours(figsize_x, figsize_y) {
   const barRatio = 1.0;
+  const getActivity = getData(Obs.ACTIVITY);
+  const getMedication = getData(Obs.MEDICATION);
+  const getSymptoms = getData(Obs.SYMPTOMS);
+
   return (
     <VictoryChart
       domainPadding={20}
@@ -97,19 +103,19 @@ export function plotHours(figsize_x, figsize_y) {
       <VictoryStack>
         <VictoryBar
           // data={data2012}
-          data={datetimes_byhour}
+          data={getActivity.dateTimeByHours}
           x="Hours"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={datetimes_byhour2}
+          data={getMedication.dateTimeByHours}
           x="Hours"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={datetimes_byhour3}
+          data={getSymptoms.dateTimeByHours}
           x="Hours"
           y="Count"
           barRatio={barRatio}
