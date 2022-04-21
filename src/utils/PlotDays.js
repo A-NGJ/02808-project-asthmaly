@@ -52,9 +52,9 @@ function daysInMonth(month, year) {
 
 export function plotDays(figsize_x, figsize_y) {
   const barRatio = 1.0;
+  const getActivity = getData(Obs.ACTIVITY);
+  const getMedication = getData(Obs.MEDICATION);
   const getSymptoms = getData(Obs.SYMPTOMS);
-  const getMedication = getData(Obs.SYMPTOMS);
-  const getActivity = getData(Obs.SYMPTOMS);
 
   return (
     <VictoryChart
