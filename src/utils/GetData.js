@@ -19,10 +19,10 @@ export function getData(dataType: Obs) {
       setSymptoms(symptoms);
 
       const medication = await firebaseConn.getMedication();
-      setMedication(symptoms);
+      setMedication(medication);
 
       const activity = await firebaseConn.getActivity();
-      setActivity(symptoms);
+      setActivity(activity);
     };
     return () => fetchFirebase();
   }, [isFocused]);
