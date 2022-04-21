@@ -17,10 +17,10 @@ Visualization.navigationOptions = ({navigation}) => ({
   ),
 });
 
-const plot_x = 375;
-const plot_y = 350;
-
 export function Visualization() {
+  const plot_x = 375;
+  const plot_y = 350;
+
   return (
     <View style={styles.plot1Container}>
       {/* Fist plot */}
