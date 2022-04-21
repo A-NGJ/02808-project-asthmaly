@@ -126,7 +126,7 @@ export function plotExerciseHours(figsize_x, figsize_y) {
       </VictoryStack>
       <VictoryLegend
         data={[
-          { name: "Exercise" }, { name: "Medication" }, { name: "Symptom" }
+          { name: "Biking" }, { name: "Walking" }, { name: "Climbing" }
         ]}
         title="Status"
         labelComponent={<VictoryLabel angle={0}/>}
