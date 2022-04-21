@@ -1,19 +1,15 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {
-  VictoryAxis,
-  VictoryBar,
-  VictoryChart,
-  VictoryLabel,
-  VictoryLegend,
-  VictoryStack,
-} from 'victory-native';
+import { VictoryBar, VictoryChart, VictoryStack, VictoryAxis, VictoryLegend, VictoryLabel, Background} from "victory-native";
 import {darkAndBlack} from './PlotTheme';
 import {getData} from './GetData';
 import {Obs} from '../constants/constants';
+import Colors from '../utils/color'
 
 // Define all days and all hours for use in GetDateDays and GetDateHours
 const all_days = Array.from({length: 31}, (_, i) => (i + 1).toString());
+
+// The function in this script makes it possible to create the first plot from the figma protype of the symptom window
 
 function make_data_helper(dates, x_name, y_name) {
   let datalist = [];
@@ -62,14 +58,25 @@ export function plotDays(figsize_x, figsize_y) {
       theme={darkAndBlack}
       width={figsize_x}
       height={figsize_y}
-      padding={{top: 40, bottom: 80, left: 50, right: 120}}>
-      <VictoryAxis tickValues={[1, 2, 3, 4]} tickFormat={all_days} />
+      padding={{ top: 40, bottom: 80, left: 50, right: 120 }}
+      style={{
+        background: { fill: Colors.GRAY }
+      }}
+      backgroundComponent={<Background x={-40} y={30} width={figsize_x + 35} height={figsize_y - 60}/>}
+    >
+      <VictoryAxis
+        tickFormat={all_days}
+        fixLabelOverlap={true}
+        label="Days"
+      />
       <VictoryAxis
         dependentAxis
         style={{
-          grid: {stroke: '#F4F5F7', strokeWidth: 1},
+          grid: { stroke: '#F4F5F7', strokeWidth: 1 },
         }}
-        tickFormat={x => `${x}`}
+        tickFormat={(x) => (`${x}`)}
+        fixLabelOverlap={true}
+        label="Symptoms"
       />
       <VictoryStack>
         <VictoryBar

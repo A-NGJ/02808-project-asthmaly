@@ -28,7 +28,7 @@ export function Visualization() {
         <Text style={styles.mainText}>NUMBER OF SYMPTOMS BY DATE</Text>
       </View>
       <View style={styles.plot1InnerContainer}>
-        <View style={styles.plotStyle}>{plotDays(plot_x, plot_y)}</View>
+        <View style={styles.plot1}>{plotDays(plot_x, plot_y)}</View>
       </View>
 
       {/* Second plot */}
@@ -36,7 +36,7 @@ export function Visualization() {
         <Text style={styles.mainText}>NUMBER OF SYMPTOMS BY HOUR</Text>
       </View>
       <View style={styles.plot2InnerContainer}>
-        <View style={styles.plotStyle}>{plotHours(plot_x, plot_y)}</View>
+        <View style={styles.plot1}>{plotHours(plot_x, plot_y)}</View>
       </View>
     </View>
   );
@@ -55,24 +55,22 @@ const styles = StyleSheet.create({
   },
   plot1InnerContainer: {
     top: -20,
-    right: 20,
+    right: 34,
     justifyContent: 'center',
     alignItems: 'center',
   },
   plot2Container: {
-    top: -60,
+    top: -80,
   },
   plot2InnerContainer: {
-    top: -80,
-    right: 20,
+    top: -100,
+    right: 34,
     justifyContent: 'center',
     alignItems: 'center',
   },
   // Taken from Home.js, this probably should be in a shared file
   mainText: {
     fontSize: 18,
-    font: 'roboto',
-    color: 'white',
-    // fontWeight: "bold",
+    color: '#ffff',
   },
 });
