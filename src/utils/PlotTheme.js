@@ -71,7 +71,7 @@ const colors = [
             strokeLinejoin
           },
           axisLabel: Object.assign({}, centeredLabelStyles, {
-            padding: 25
+            padding: 33
           }),
           grid: {
             fill: "none",
