@@ -5,6 +5,7 @@ import {darkAndBlack} from './PlotTheme';
 import Colors from '../utils/color'
 import {getData} from './GetData';
 import {Obs} from '../constants/constants';
+import Colors from '../utils/color'
 
 // Define all hours for use in GetDateHours
 const all_hours = Array.from({length: 24}, (_, i) => (i + 1).toString());
