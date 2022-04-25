@@ -29,19 +29,16 @@ Home.navigationOptions = ({ navigation }) => ({
 });
 
 export function Home(){
-  const firebaseConn = new FirebaseConn();
+  const firebaseConn = FirebaseConn.getInstance();
     // From https://docs.nativebase.io/button
   const isFocused = useIsFocused();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [symptoms, setSymptoms] = useState('');
   useEffect(() => {
     const fetchFirebase = async () => {
       const name = await firebaseConn.getName();
       const email = await firebaseConn.getEmail();
-      const symptoms = await firebaseConn.getSymptoms();
-      setSymptoms(symptoms);
       setName(name);
       setEmail(email)
     }
@@ -177,7 +174,7 @@ const styles = StyleSheet.create({
   // Heading text
   maintext: {
     fontSize: 20,
-    font: "roboto",
+    fontFamily: "roboto",
     color: "white",
     // fontWeight: "bold",
   },
@@ -188,7 +185,7 @@ const styles = StyleSheet.create({
     aspectRatio: 240 / 30,
     fontSize: 15,
     left: "5%",
-    font: "roboto",
+    fontFamily: "roboto",
     color: "white",
     fontWeight: "bold",
   },
@@ -199,7 +196,7 @@ const styles = StyleSheet.create({
     aspectRatio: 240 / 20,
     fontSize: 15,
     left: "5%",
-    font: "roboto",
+    fontFamily: "roboto",
     color: "white",
   },
 
@@ -207,7 +204,7 @@ const styles = StyleSheet.create({
   emailText: {
     fontSize: 12,
     color: "gray",
-    font: "roboto",
+    fontFamily: "roboto",
   },
 
   // Add profile picture

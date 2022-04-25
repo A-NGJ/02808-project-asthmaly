@@ -11,7 +11,8 @@ export class IconType {
  }
 
  export class Field {
-   static NAME = 'name'
+   static KEY   = 'key'
+   static NAME  = 'name'
    static PHONE = 'phone'
    static EMAIL = 'email'
  }
