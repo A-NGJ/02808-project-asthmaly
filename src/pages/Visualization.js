@@ -1,72 +1,76 @@
-import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { plotHours } from "../utils/PlotHours";
-import { plotDays } from "../utils/PlotDays";
+import * as React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {plotHours} from '../utils/PlotHours';
+import {plotDays} from '../utils/PlotDays';
 
-Visualization.navigationOptions = ({ navigation }) => ({
-  tabBarLabel: "Visualization",
-  tabBarIcon: ({ color, size }) => (
-    <Icon
-      name="poll"
-      color={color}
-      size={size} />
-  ),
+Visualization.navigationOptions = ({navigation}) => ({
+  tabBarLabel: 'Visualization',
+  tabBarIcon: ({color, size}) => <Icon name="poll" color={color} size={size} />,
   headerRight: () => (
     <Icon
       name="dots-vertical"
-      color={"#ffff"}
+      color={'#ffff'}
       size={25}
-      onPress={() => navigation.navigate("Settings")}
+      onPress={() => navigation.navigate('Settings')}
     />
   ),
 });
 
-
-var plot_x = 375;
-var plot_y = 325;
-
-
 export function Visualization() {
+  const plot_x = 375;
+  const plot_y = 325;
+
   return (
-    <View style={{ top: 10, left: 10 }}>
+    <View style={styles.plot1Container}>
       {/* Fist plot */}
       <View>
-        <Text style={styles.maintext}>NUMBER OF SYMPTOMS BY DATE</Text>
+        <Text style={styles.mainText}>NUMBER OF SYMPTOMS BY DATE</Text>
       </View>
-      <View style={{ top: -20, right: 34, justifyContent: "center", alignItems: "center" }}>
-        <View style={styles.plot1}>
-          {plotDays(plot_x, plot_y)}
-        </View>
+      <View style={styles.plot1InnerContainer}>
+        <View style={styles.plot1}>{plotDays(plot_x, plot_y)}</View>
       </View>
 
       {/* Second plot */}
-      <View style={{ top: -80 }}>
-        <Text style={styles.maintext}>NUMBER OF SYMPTOMS BY HOUR</Text>
+      <View style={styles.plot2Container}>
+        <Text style={styles.mainText}>NUMBER OF SYMPTOMS BY HOUR</Text>
       </View>
-      <View style={{ top: -100, right: 34, justifyContent: "center", alignItems: "center" }}>
-        <View style={styles.plot1}>
-          {plotHours(plot_x, plot_y)}
-        </View>
+      <View style={styles.plot2InnerContainer}>
+        <View style={styles.plot1}>{plotHours(plot_x, plot_y)}</View>
       </View>
     </View>
   );
-};
-
+}
 
 const styles = StyleSheet.create({
-  // General button design
   plot1: {
-    height: plot_x,
-    width: plot_y,
+    height: 375,
+    width: 325,
     // width: '100%',
     // aspectRatio: 350 / 75,
   },
+  plot1Container: {
+    top: 10,
+    left: 10,
+  },
+  plot1InnerContainer: {
+    top: -20,
+    right: 34,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  plot2Container: {
+    top: -80,
+  },
+  plot2InnerContainer: {
+    top: -100,
+    right: 34,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   // Taken from Home.js, this probably should be in a shared file
-  maintext: {
+  mainText: {
     fontSize: 18,
-    font: "roboto",
-    color: "white",
-    // fontWeight: "bold",
+    color: '#ffff',
   },
 });
