@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -19,6 +19,7 @@ const Stack = createNativeStackNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
 export function TabNavigator() {
+  
   const { colors } = useTheme();
   return (
     <Tab.Navigator

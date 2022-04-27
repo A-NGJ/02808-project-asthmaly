@@ -2,19 +2,56 @@ import firestore from '@react-native-firebase/firestore';
 import {Field, Obs} from '../constants/constants';
 
 class FirebaseConn {
-  USERS = 'Users';
+  USERS = "Users";
+  static _firebaseConn = null;
+
+  static getInstance() {
+    if (FirebaseConn._firebaseConn == null) {
+      FirebaseConn._firebaseConn = new FirebaseConn();
+    }
+    return this._firebaseConn;
+  }
 
   constructor() {
     this.state = {
       user: {
-        key: 'MlxTXSR7H4Q7V1pTxIwy',
-        name: '',
-        phone: '',
+        key: "",
+        email: "",
+        name: "",
+        phone: "",
         symptoms: [],
         activities: [],
         medication: [],
       },
     };
+  }
+
+  createUser(key, email) {
+    firestore()
+      .collection(this.USERS)
+      .doc(key)
+      .set({
+        email: email,
+        name: "",
+        phone: "",
+        symptoms: [],
+        activities: [],
+        medications: [],
+      });
+    this.state.user.key = key;
+    this.state.user.email = email;
+  }
+
+  set(key, value) {
+    this.state.user[key] = value;
+  }
+
+  setUser(uid) {
+    this.set(Field.KEY, uid);
+  }
+
+  setEmail(email) {
+    this.set(Field.EMAIL, email);
   }
 
   update(key, value) {
@@ -33,12 +70,18 @@ class FirebaseConn {
 
   async get(key) {
     await firestore()
-      .collection(this.USERS)
-      .doc(this.state.user.key)
-      .get()
-      .then(documentSnapshot => {
-        this.state.user[key] = documentSnapshot.data()[key];
-      });
+    .collection(this.USERS)
+    .doc(this.state.user.key)
+    .get()
+    .then(documentSnapshot => {
+      this.state.user[key] = documentSnapshot.data()[key]
+    })
+    .catch(error => {
+      if (error instanceof TypeError) {
+        return null;
+      }
+      throw error;
+    })
   }
 
   async getName() {
