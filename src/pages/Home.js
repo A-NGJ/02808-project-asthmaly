@@ -46,7 +46,7 @@ export function Home(){
   }, [isFocused])
 
     return (
-    <View style={{height: windowHeight, width: windowWidth, margin: 5, flex: 1}}>
+    <View style={{height: windowHeight, width: windowWidth, flex: 1, paddingBottom: 10}}>
       {/* Profile info */}
       <View style = {{top: '5%', justifyContent: 'center', alignItems: 'center'}}>
         <Image source={require('../images/anne_nielsen_profile_picture.png')} style={styles.profilePicture} />
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   // Heading text
   maintext: {
     fontSize: 20,
-    fontFamily: "roboto",
+    // fontFamily: "roboto",
     color: "white",
     // fontWeight: "bold",
   },
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     aspectRatio: 240 / 30,
     fontSize: 15,
     left: "5%",
-    fontFamily: "roboto",
+    // fontFamily: "roboto",
     color: "white",
     fontWeight: "bold",
   },
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     aspectRatio: 240 / 20,
     fontSize: 15,
     left: "5%",
-    fontFamily: "roboto",
+    // fontFamily: "roboto",
     color: "white",
   },
 
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   emailText: {
     fontSize: 12,
     color: "gray",
-    fontFamily: "roboto",
+    // fontFamily: "roboto",
   },
 
   // Add profile picture

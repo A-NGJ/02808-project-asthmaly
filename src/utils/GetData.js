@@ -5,8 +5,8 @@ import {GetDateHours} from './PlotHours';
 import {GetDateDays} from './PlotDays';
 import {Obs} from '../constants/constants';
 
-export function getData(dataType: Obs) {
-  const firebaseConn = new FirebaseConn();
+export function getData(dataType) {
+  const firebaseConn = FirebaseConn.getInstance();
   const [symptoms, setSymptoms] = useState([]);
   const [medication, setMedication] = useState([]);
   const [activity, setActivity] = useState([]);

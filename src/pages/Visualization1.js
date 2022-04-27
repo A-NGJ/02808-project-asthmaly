@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   // Taken from Home.js, this probably should be in a shared file
   maintext: {
     fontSize: 18,
-    font: "roboto",
+    // font: "roboto",
     color: "white",
     // fontWeight: "bold",
   },

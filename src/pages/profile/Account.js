@@ -9,7 +9,7 @@ import FirebaseConn from "../../connection/firestore";
 
 function IconTextInput(colors, iconName, input, setInput, {
   textContentType = null,
-  placeholder = null,
+  placeholder = "",
   keyboardType = null,
 } = {}) {
   return (

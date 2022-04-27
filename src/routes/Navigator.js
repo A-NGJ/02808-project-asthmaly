@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -13,7 +13,6 @@ import ProfileDoctor from "../pages/profile/Doctor";
 import ProfileFeedbackSupport from "../pages/profile/FeedbackSupport";
 import ProfileAbout from "../pages/profile/About";
 import { Visualization1 } from "../pages/Visualization1";
-import FirebaseConn from "../connection/firestore";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
