@@ -141,8 +141,8 @@ export function VisTopTabNavigator() {
   return (
     <TopTab.Navigator
       tabBar={(props) => <TopTabBar {...props} />}>
-      <TopTab.Screen name="Symptoms" component={Visualization} />
-      <TopTab.Screen name="Exercise" component={Visualization1} />
+      <TopTab.Screen key="symptoms" name="Symptoms" component={Visualization} />
+      <TopTab.Screen key="activity" name="Activity" component={Visualization1} />
     </TopTab.Navigator>
   );
 }
