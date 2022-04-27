@@ -1,12 +1,37 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image, Text, Switch } from "react-native";
+import { StyleSheet, View, Image, Text, Switch, Alert } from "react-native";
+import auth from "@react-native-firebase/auth";
 import { Box, Button, Center, FormControl, Heading, Input, Link, VStack, Icon, HStack } from "native-base";
 import MaterialIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useTheme } from "@react-navigation/native";
 
-export function Login() {
+function onLogin(callback, email, password) {
+  auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(() => {
+      Alert.alert("User account created and signed in!");
+      callback(false);
+    })
+    .catch(error => {
+      if (error.code === "auth/email-already-in-use") {
+        auth().signInWithEmailAndPassword(email, password);
+      }
+
+      if (error.code === "auth/invalid-email") {
+        console.log("that email address is invalid")
+      }
+      console.log(error);
+    })
+}
+
+export function Login({ parentCallback }) {
+  const { colors } = useTheme();
+
   const [show, setShow] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <View style={styles.container}>
@@ -35,15 +60,22 @@ export function Login() {
               mt="5">
               <FormControl>
                 <Input
+                  id="email"
                   size="md"
                   h="50px"
-                  color="#ffff" fkgjfkgj
+                  color="#ffffff"
                   placeholder="E-mail"
                   InputLeftElement={<Icon as={<MaterialIcons name="email" />} size={5} ml="2" color="muted.400" />}
-                  style={styles.input} />
+                  style={styles.input}
+                  selectionColor={colors.primary}
+                  value={email}
+                  onChangeText={value => setEmail(value)}
+                  />
               </FormControl>
               <FormControl>
                 <Input
+                  value={password}
+                  onChangeText={value => setPassword(value)}
                   size="md"
                   h="50px"
                   color="#ffff"
@@ -52,7 +84,9 @@ export function Login() {
                   InputLeftElement={<Icon as={<MaterialIcons name="lock" />} size={5} ml="2" color="muted.400" />}
                   InputRightElement={<Icon as={<MaterialIcons name={show ? "eye" : "eye-off"} />} size={5}
                                            mr="2" color="muted.400" onPress={() => setShow(!show)} />}
-                  style={styles.input} />
+                  style={styles.input}
+                  selectionColor={colors.primary}
+                  />
                 <View style={{ marginTop: 2 }}>
                   <HStack alignItems="flex-start">
                     <Switch
@@ -78,7 +112,8 @@ export function Login() {
                 <Button
                   mt="2"
                   colorScheme="indigo"
-                  style={styles.button}>
+                  style={styles.button}
+                  onPress={() => {onLogin(parentCallback, email, password)}}>
                   Login
                 </Button>
               </View>

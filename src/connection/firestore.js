@@ -1,35 +1,72 @@
-import firestore from "@react-native-firebase/firestore"
-import { Field, Obs } from "../constants/constants"
+import firestore from '@react-native-firebase/firestore';
+import {Field, Obs} from '../constants/constants';
 
 class FirebaseConn {
   USERS = "Users";
+  static _firebaseConn = null;
+
+  static getInstance() {
+    if (FirebaseConn._firebaseConn == null) {
+      FirebaseConn._firebaseConn = new FirebaseConn();
+    }
+    return this._firebaseConn;
+  }
 
   constructor() {
     this.state = {
       user: {
-        key: "MlxTXSR7H4Q7V1pTxIwy",
+        key: "",
+        email: "",
         name: "",
         phone: "",
         symptoms: [],
         activities: [],
         medication: [],
-      }
+      },
     };
+  }
 
-  };
+  createUser(key, email) {
+    firestore()
+      .collection(this.USERS)
+      .doc(key)
+      .set({
+        email: email,
+        name: "",
+        phone: "",
+        symptoms: [],
+        activities: [],
+        medications: [],
+      });
+    this.state.user.key = key;
+    this.state.user.email = email;
+  }
+
+  set(key, value) {
+    this.state.user[key] = value;
+  }
+
+  setUser(uid) {
+    this.set(Field.KEY, uid);
+  }
+
+  setEmail(email) {
+    this.set(Field.EMAIL, email);
+  }
 
   update(key, value) {
     firestore()
-    .collection(this.USERS)
-    .doc(this.state.user.key)
-    .update({
-      [key]: value,
-    });
+      .collection(this.USERS)
+      .doc(this.state.user.key)
+      .update({
+        [key]: value,
+      });
   }
-  
+
   addObs(type) {
-    this.update(type, firestore.FieldValue.arrayUnion(new Date()));
-  };
+    const dateTime = Date.parse(new Date());
+    this.update(type, firestore.FieldValue.arrayUnion(dateTime));
+  }
 
   async get(key) {
     await firestore()
@@ -38,7 +75,13 @@ class FirebaseConn {
     .get()
     .then(documentSnapshot => {
       this.state.user[key] = documentSnapshot.data()[key]
-    });
+    })
+    .catch(error => {
+      if (error instanceof TypeError) {
+        return null;
+      }
+      throw error;
+    })
   }
 
   async getName() {
@@ -59,24 +102,23 @@ class FirebaseConn {
   async getSymptoms() {
     await this.get(Obs.SYMPTOMS);
     const symptoms = [];
-    this.state.user.symptoms.forEach(element => symptoms.push(Date(element["seconds"]*1000  + symptoms["nanoseconds"]/1000000)));
+    this.state.user.symptoms.forEach(element => symptoms.push(element));
     return symptoms;
   }
 
   async getMedication() {
     await this.get(Obs.MEDICATION);
     const medication = [];
-    this.state.user.medication.forEach(element => symptoms.push(Date(element["seconds"]*1000  + symptoms["nanoseconds"]/1000000)));
+    this.state.user.medication.forEach(element => medication.push(element));
     return medication;
   }
 
   async getActivity() {
     await this.get(Obs.ACTIVITY);
     const activities = [];
-    this.state.user.activities.forEach(element => symptoms.push(Date(element["seconds"]*1000  + symptoms["nanoseconds"]/1000000)));
+    this.state.user.activities.forEach(element => activities.push(element));
     return activities;
   }
-
 }
 
 export default FirebaseConn;

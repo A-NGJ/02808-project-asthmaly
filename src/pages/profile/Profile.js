@@ -1,5 +1,6 @@
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
+import auth from "@react-native-firebase/auth";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -74,6 +75,12 @@ export function IconButton(data, colors, onPress) {
   }
 }
 
+function logout() {
+  auth()
+    .signOut()
+    .then(() => console.log('User signed out!'));
+}
+
 Profile.navigationOptions = ({ navigation }) => ({
   tabBarLabel: "Profile",
   title: "Profile",
@@ -118,8 +125,7 @@ export function Profile({ navigation }) {
             onPress: () => navigation.navigate("ProfileAbout"),
           },
           {
-            key: "Logout", icon: "logout", iconType: IconType.MaterialCommunity, onPress: () => {
-            },
+            key: "Logout", icon: "logout", iconType: IconType.MaterialCommunity, onPress: () => logout(),
           },
         ]}
         renderItem={({ item }) => IconButton(item, colors, item.onPress)}

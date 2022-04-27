@@ -9,7 +9,7 @@ import FirebaseConn from "../../connection/firestore";
 
 function IconTextInput(colors, iconName, input, setInput, {
   textContentType = null,
-  placeholder = null,
+  placeholder = "",
   keyboardType = null,
 } = {}) {
   return (
@@ -33,11 +33,11 @@ function IconTextInput(colors, iconName, input, setInput, {
 }
 
 export function ProfileAccount() {
-  const firebaseConn = new FirebaseConn();
+  const firebaseConn = FirebaseConn.getInstance();
   const { colors } = useTheme();
-  const [fullName, setName] = React.useState(firebaseConn.get("name"));
-  const [email, setEmail] = React.useState(Settings.get("email"));
-  const [phone, setPhone] = React.useState(Settings.get("phone"));
+  const [fullName, setName] = React.useState(firebaseConn.get(Field.NAME));
+  const [email, setEmail] = React.useState(firebaseConn.get(Field.EMAIL));
+  const [phone, setPhone] = React.useState(firebaseConn.get(Field.PHONE));
 
   useEffect(() => {
     const fetchFirebase = async () => {
