@@ -25,7 +25,7 @@ export function Visualization() {
     <View style={styles.plot1Container}>
       {/* Fist plot */}
       <View>
-        <Text style={styles.mainText}>NUMBER OF SYMPTOMS BY DATE</Text>
+        <Text style={styles.mainText}>NUMBER OF SYMPTOMS BY DAY</Text>
       </View>
       <View style={styles.plot1InnerContainer}>
         <View style={styles.plot1}>{plotDays(plot_x, plot_y)}</View>
