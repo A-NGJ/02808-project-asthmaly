@@ -1,6 +1,5 @@
-import React from 'react';
-import {View, TouchableOpacity, Text} from 'react-native'
-
+import React, { Component } from 'react';
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native'
 import { ContainerCenter } from '../styles/style';
 
 export function RoundedButton(text, onPress, colors) {
@@ -18,3 +17,72 @@ export function RoundedButton(text, onPress, colors) {
     </View>
   )
 }
+
+export class RadioButton extends Component {
+
+  state = {
+    value: this.props["init"],
+  }
+
+  render() {
+    // const { theme } = this.props;
+    const { PROP, theme, callback} = this.props;
+    const { value } = this.state
+    return (
+      <View>
+        {PROP.map(res => {
+          return (
+            <View key={res.key} style={styles.container}>
+              <Text style={[styles.radioText, {color: theme.primary}]}>{res.name}</Text>
+              <TouchableOpacity
+                style={[styles.radioCircle, {borderColor: theme.primary}]}
+                onPress={() => {
+                  this.setState({
+                    value: res.key,
+                  });
+                  callback(res.key);
+                }}
+              >
+                {value === res.key && <View style={[styles.selectedRb, {backgroundColor: theme.primary}]} />}
+              </TouchableOpacity>
+            </View>
+          );
+        })}
+          {/* <Text> Selected: {this.state.value} </Text> */}
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 35,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  radioText: {
+    marginRight: 35,
+    fontSize: 20,
+    fontWeight: "700",
+  },
+  radioCircle: {
+    height: 30,
+    width: 30,
+    borderRadius: 100,
+    borderWidth: 2,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  selectedRb: {
+    width: 15,
+    height: 15,
+    borderRadius: 50,
+  },
+  result: {
+    marginTop: 20,
+    color: "white",
+    fontWeight: "600",
+    backgroundColor: "#F3BFE"
+  },
+})

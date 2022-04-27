@@ -68,6 +68,11 @@ class FirebaseConn {
     this.update(type, firestore.FieldValue.arrayUnion(dateTime));
   }
 
+  addActivity(type) {
+    const dateTime = Date.parse(new Date());
+    this.update(Obs.ACTIVITY, firestore.FieldValue.arrayUnion({timestamp: dateTime, type: type}))
+  }
+
   async get(key) {
     await firestore()
     .collection(this.USERS)

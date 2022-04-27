@@ -61,14 +61,10 @@ const styles = StyleSheet.create({
   plot1: {
     height: plot_x,
     width: plot_y,
-    // width: '100%',
-    // aspectRatio: 350 / 75,
   },
   // Taken from Home.js, this probably should be in a shared file
   maintext: {
     fontSize: 18,
-    // font: "roboto",
     color: "white",
-    // fontWeight: "bold",
   },
 });
