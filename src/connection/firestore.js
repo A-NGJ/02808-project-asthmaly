@@ -1,5 +1,5 @@
-import firestore from "@react-native-firebase/firestore"
-import { Field, Obs } from "../constants/constants"
+import firestore from '@react-native-firebase/firestore';
+import {Field, Obs} from '../constants/constants';
 
 class FirebaseConn {
   USERS = "Users";
@@ -22,10 +22,9 @@ class FirebaseConn {
         symptoms: [],
         activities: [],
         medication: [],
-      }
+      },
     };
-
-  };
+  }
 
   createUser(key, email) {
     firestore()
@@ -57,16 +56,17 @@ class FirebaseConn {
 
   update(key, value) {
     firestore()
-    .collection(this.USERS)
-    .doc(this.state.user.key)
-    .update({
-      [key]: value,
-    });
+      .collection(this.USERS)
+      .doc(this.state.user.key)
+      .update({
+        [key]: value,
+      });
   }
-  
+
   addObs(type) {
-    this.update(type, firestore.FieldValue.arrayUnion(new Date()));
-  };
+    const dateTime = Date.parse(new Date());
+    this.update(type, firestore.FieldValue.arrayUnion(dateTime));
+  }
 
   async get(key) {
     await firestore()
@@ -102,24 +102,23 @@ class FirebaseConn {
   async getSymptoms() {
     await this.get(Obs.SYMPTOMS);
     const symptoms = [];
-    this.state.user.symptoms.forEach(element => symptoms.push(Date(element["seconds"]*1000  + symptoms["nanoseconds"]/1000000)));
+    this.state.user.symptoms.forEach(element => symptoms.push(element));
     return symptoms;
   }
 
   async getMedication() {
     await this.get(Obs.MEDICATION);
     const medication = [];
-    this.state.user.medication.forEach(element => symptoms.push(Date(element["seconds"]*1000  + symptoms["nanoseconds"]/1000000)));
+    this.state.user.medication.forEach(element => medication.push(element));
     return medication;
   }
 
   async getActivity() {
     await this.get(Obs.ACTIVITY);
     const activities = [];
-    this.state.user.activities.forEach(element => symptoms.push(Date(element["seconds"]*1000  + symptoms["nanoseconds"]/1000000)));
+    this.state.user.activities.forEach(element => activities.push(element));
     return activities;
   }
-
 }
 
 export default FirebaseConn;
