@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Text, View, StyleSheet, Image, Dimensions, Modal, Pressable} from "react-native";
+import { Text, View, StyleSheet, Image, Dimensions, Modal, Pressable, ColorPropType} from "react-native";
 import { Button, Box } from "native-base";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {Obs} from '../constants/constants';
@@ -7,6 +7,8 @@ import FirebaseConn from '../connection/firestore';
 import { useIsFocused } from "@react-navigation/native";
 import { useTheme } from "@react-navigation/native";
 import { RadioButton } from "../components/buttons";
+import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
+import Colors from '../utils/color'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -38,6 +40,7 @@ export function Home(){
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [activity, setActivity] = useState('cycling');
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -68,7 +71,19 @@ export function Home(){
       setEmail(email)
     }
     fetchFirebase();
-  }, [isFocused])
+  }, [isFocused]);
+
+  function radioButtonCallback(value) {
+    setActivity(value);
+  }
+
+  function showToast(message) {
+    console.log(message);
+    Toast.show({
+      type: "success",
+      text1: message,
+    })
+  }
 
     return (
     <View style={{height: windowHeight, width: windowWidth, flex: 1, paddingBottom: 10}}>
@@ -86,7 +101,7 @@ export function Home(){
             backgroundColor={colors.background}
           >
             <View style={{paddingTop: 20}}>
-              <RadioButton PROP={PROP} theme={colors}/>
+              <RadioButton PROP={PROP} theme={colors} callback={radioButtonCallback} init={activity}/>
             </View>
             <View style={{padding: 20, flex: 1}}>
               <Pressable
@@ -98,7 +113,11 @@ export function Home(){
                     : colors.buttonInactive
                   }
                 ]}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={() => {
+                  firebaseConn.addActivity(activity);
+                  setModalVisible(!modalVisible);
+                  showToast(PROP.filter(e => e.key === activity)[0].name+" added")
+                }}
               >
                 <View style={styles.centeredView}>
                   <Text style={styles.maintext}>Save</Text>
@@ -134,7 +153,10 @@ export function Home(){
         <Button
           key={'lg'} bg="#383434" size={'lg'}
           style = {styles.button} _pressed={{bg: "gray.800"}}
-          onPress={() => firebaseConn.addObs(Obs.SYMPTOMS)}
+          onPress={() => {
+            firebaseConn.addObs(Obs.SYMPTOMS)
+            showToast("Symptom added")
+          }}
         >
           <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
             <View style={{margin: 0}}>
@@ -160,7 +182,10 @@ export function Home(){
         <Box alignItems="center">
           <Button key={'lg'} bg="#383434" size={'lg'}
             style = {styles.button} _pressed={{bg: "gray.800"}}
-            onPress={() => firebaseConn.addObs(Obs.MEDICATION)}
+            onPress={() => {
+              firebaseConn.addObs(Obs.MEDICATION)
+              showToast("Medication added")
+            }}
           >
             <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
               <View style={{margin: 0}}>
@@ -198,7 +223,6 @@ export function Home(){
             _pressed={{ bg: "gray.800" }}
             onPress={() => {
               setModalVisible(true)
-              // firebaseConn.addObs(Obs.ACTIVITY)
             }}> 
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <View style={{ margin: 0 }}>
@@ -216,8 +240,35 @@ export function Home(){
           </Button>
         </Box>
       </View>
+      <Toast config={toastConfig}/>
     </View>
   );
+}
+
+const toastConfig = {
+  success: (props) => (
+    <BaseToast
+    {...props}
+    style={{
+      borderLeftColor: Colors.WHITE,
+      backgroundColor: Colors.LIGHT_GRAY,
+      width: "60%",
+      alignContent: "center",
+      justifyContent: "center",
+      opacity: 0.8
+    }}
+    contentContainerStyle={{
+      alignContent: "center",
+      justifyContent: "center",
+      opacity: 1
+    }}
+    text1Style={{
+      fontSize: 18,
+      color: Colors.WHITE,
+      fontWeight: "400",
+    }}
+    />
+  )
 }
 
 const BORDER_RADIUS = 6;

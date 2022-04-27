@@ -21,13 +21,13 @@ export function RoundedButton(text, onPress, colors) {
 export class RadioButton extends Component {
 
   state = {
-    value: null,
+    value: this.props["init"],
   }
 
   render() {
     // const { theme } = this.props;
-    const { PROP, theme } = this.props;
-    const { value } = this.state;
+    const { PROP, theme, callback} = this.props;
+    const { value } = this.state
     return (
       <View>
         {PROP.map(res => {
@@ -40,6 +40,7 @@ export class RadioButton extends Component {
                   this.setState({
                     value: res.key,
                   });
+                  callback(res.key);
                 }}
               >
                 {value === res.key && <View style={[styles.selectedRb, {backgroundColor: theme.primary}]} />}

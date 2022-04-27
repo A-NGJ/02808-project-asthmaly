@@ -33,6 +33,7 @@
     "react-native-svg": "^12.3.0",
     "react-native-tab-view": "^3.1.1",
     "react-native-template-native-base": "^1.0.7",
+    "react-native-toast-message": "^2.1.5",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web-refresh-control": "^1.1.1",
     "react-native-windows": "0.67.4",
