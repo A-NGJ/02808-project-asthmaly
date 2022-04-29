@@ -51,7 +51,7 @@ export function Visualization() {
       let activity_data = await firebaseConn.getActivity();
       setActivity(obs2date(activity_data));
     };
-    return () => fetchFirebase();
+    fetchFirebase().catch(console.error);
   }, [isFocused]);
 
   return (
