@@ -1,8 +1,16 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import { VictoryBar, VictoryChart, VictoryStack, VictoryAxis, VictoryLegend, VictoryLabel, Background} from "victory-native";
+import {
+  VictoryBar,
+  VictoryChart,
+  VictoryStack,
+  VictoryAxis,
+  VictoryLegend,
+  VictoryLabel,
+  Background,
+} from 'victory-native';
 import {darkAndBlack} from './PlotTheme';
-import Colors from '../utils/color'
+import Colors from '../utils/color';
 
 // Define all days and all hours for use in GetDateDays and GetDateHours
 const all_days = Array.from({length: 31}, (_, i) => (i + 1).toString());
@@ -32,7 +40,7 @@ export function GetDateDays(dates) {
 
   for (let i = 0; i < dates.length; i++) {
     // Get day number and convert to string
-    const day = dates[i].getHours().toString();
+    const day = dates[i].getDate().toString();
     // Increment if day has been observed
     dateTimes[day] += 1;
   }
@@ -53,23 +61,25 @@ export function plotDays(figsize_x, figsize_y, activity, medication, symptoms) {
       theme={darkAndBlack}
       width={figsize_x}
       height={figsize_y}
-      padding={{ top: 40, bottom: 80, left: 50, right: 120 }}
+      padding={{top: 40, bottom: 80, left: 50, right: 120}}
       style={{
-        background: { fill: Colors.GRAY }
+        background: {fill: Colors.GRAY},
       }}
-      backgroundComponent={<Background x={-40} y={30} width={figsize_x + 35} height={figsize_y - 60}/>}
-    >
-      <VictoryAxis
-        tickFormat={all_days}
-        fixLabelOverlap={true}
-        label="Days"
-      />
+      backgroundComponent={
+        <Background
+          x={-40}
+          y={30}
+          width={figsize_x + 35}
+          height={figsize_y - 60}
+        />
+      }>
+      <VictoryAxis tickFormat={all_days} fixLabelOverlap={true} label="Days" />
       <VictoryAxis
         dependentAxis
         style={{
-          grid: { stroke: '#F4F5F7', strokeWidth: 1 },
+          grid: {stroke: '#F4F5F7', strokeWidth: 1},
         }}
-        tickFormat={(x) => (`${x}`)}
+        tickFormat={x => `${x}`}
         fixLabelOverlap={true}
         label="Symptoms"
       />
