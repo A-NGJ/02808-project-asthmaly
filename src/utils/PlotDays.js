@@ -2,8 +2,6 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import { VictoryBar, VictoryChart, VictoryStack, VictoryAxis, VictoryLegend, VictoryLabel, Background} from "victory-native";
 import {darkAndBlack} from './PlotTheme';
-import {getData} from './GetData';
-import {Obs} from '../constants/constants';
 import Colors from '../utils/color'
 
 // Define all days and all hours for use in GetDateDays and GetDateHours
@@ -46,11 +44,8 @@ function daysInMonth(month, year) {
   return new Date(year, month, 0).getDate();
 }
 
-export function plotDays(figsize_x, figsize_y) {
+export function plotDays(figsize_x, figsize_y, activity, medication, symptoms) {
   const barRatio = 1.0;
-  const getActivity = getData(Obs.ACTIVITY);
-  const getMedication = getData(Obs.MEDICATION);
-  const getSymptoms = getData(Obs.SYMPTOMS);
 
   return (
     <VictoryChart
@@ -80,19 +75,19 @@ export function plotDays(figsize_x, figsize_y) {
       />
       <VictoryStack>
         <VictoryBar
-          data={getActivity.dateTimeByDay}
+          data={activity.dateTimeByDay}
           x="Days"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={getMedication.dateTimeByDay}
+          data={medication.dateTimeByDay}
           x="Days"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={getSymptoms.dateTimeByDay}
+          data={symptoms.dateTimeByDay}
           x="Days"
           y="Count"
           barRatio={barRatio}

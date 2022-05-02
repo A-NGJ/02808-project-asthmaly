@@ -7,7 +7,7 @@ import FirebaseConn from '../connection/firestore';
 import { useIsFocused } from "@react-navigation/native";
 import { useTheme } from "@react-navigation/native";
 import { RadioButton } from "../components/buttons";
-import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
+import Toast, { BaseToast } from 'react-native-toast-message';
 import Colors from '../utils/color'
 
 const windowWidth = Dimensions.get('window').width;
@@ -32,7 +32,7 @@ Home.navigationOptions = ({ navigation }) => ({
   ),
 });
 
-export function Home(){
+export function Home(props){
   const firebaseConn = FirebaseConn.getInstance();
     // From https://docs.nativebase.io/button
   const isFocused = useIsFocused();
@@ -71,7 +71,7 @@ export function Home(){
       setEmail(email)
     }
     fetchFirebase();
-  }, [isFocused]);
+  }, [props, isFocused]);
 
   function radioButtonCallback(value) {
     setActivity(value);
