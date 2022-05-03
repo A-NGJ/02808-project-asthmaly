@@ -44,7 +44,7 @@ export function Visualization1() {
 
       {/* Second plot*/}
       <View style={{ top: -80 }}>
-        <Text style={styles.maintext}>NUMBER OF SYMPTOMS WHILE EXERCISING</Text>
+        <Text style={styles.maintext}>SYMPTOMS PER EXERCISE PER HOUR</Text>
       </View>
       <View style={{ top: -100, right: 34, justifyContent: "center", alignItems: "center" }}>
         <View style={styles.plot1}>

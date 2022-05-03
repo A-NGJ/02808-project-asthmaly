@@ -75,7 +75,7 @@ export function plotDays(figsize_x, figsize_y, activity, medication, symptoms) {
           height={figsize_y - 60}
         />
       }>
-      <VictoryAxis tickFormat={all_days} fixLabelOverlap={true} label="Days" />
+      <VictoryAxis tickFormat={all_days} fixLabelOverlap={true} label="Day of Month" />
       <VictoryAxis
         dependentAxis
         style={{

@@ -76,7 +76,7 @@ export function plotHours(figsize_x, figsize_y, activity, medication, symptoms) 
       <VictoryAxis
         tickFormat={all_hours}
         fixLabelOverlap={true}
-        label="Hours"
+        label="Hour of Day"
       />
       <VictoryAxis
         dependentAxis
