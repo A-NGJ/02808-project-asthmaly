@@ -73,6 +73,22 @@ class FirebaseConn {
     this.update(Obs.ACTIVITY, firestore.FieldValue.arrayUnion({timestamp: dateTime, type: type}))
   }
 
+  async getAll() {
+    return await firestore()
+    .collection(this.USERS)
+    .doc(this.state.user.key)
+    .get()
+    .then(documentSnapshot => {
+      return documentSnapshot.data()
+    })
+    .catch(error => {
+      if (error instanceof TypeError) {
+        return null;
+      }
+      throw error;
+    })
+  }
+
   async get(key) {
     await firestore()
     .collection(this.USERS)

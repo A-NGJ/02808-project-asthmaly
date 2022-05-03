@@ -7,6 +7,7 @@ import {useIsFocused} from '@react-navigation/native';
 import FirebaseConn from '../connection/firestore';
 import {GetDateHours} from '../utils/PlotHours';
 import {GetDateDays} from '../utils/PlotDays';
+import {Field, Obs} from '../constants/constants';
 
 Visualization.navigationOptions = ({navigation}) => ({
   tabBarLabel: 'Visualization',
@@ -38,18 +39,18 @@ export function Visualization() {
   const firebaseConn = FirebaseConn.getInstance();
   const [symptoms, setSymptoms] = useState(obs2date([]));
   const [medication, setMedication] = useState(obs2date([]));
-  const [activity, setActivity] = useState(obs2date([]));
+  const [activityTimestamp, setActivityTimestamp] = useState(obs2date([]));
 
   useEffect(() => {
     const fetchFirebase = async () => {
-      let symptoms_data = await firebaseConn.getSymptoms();
-      setSymptoms(obs2date(symptoms_data));
 
-      let medication_data = await firebaseConn.getMedication();
-      setMedication(obs2date(medication_data));
+      const user_data = await firebaseConn.getAll();
+      setSymptoms(obs2date(user_data[Obs.SYMPTOMS]))
+      setMedication(obs2date(user_data[Obs.MEDICATION]))
 
-      let activity_data = await firebaseConn.getActivity();
-      setActivity(obs2date(activity_data));
+      let activity = user_data[Obs.ACTIVITY];
+      let timestamp = activity.map(d => d.timestamp)
+      setActivityTimestamp(obs2date(timestamp))
     };
     fetchFirebase().catch(console.error);
   }, [isFocused]);
@@ -63,7 +64,7 @@ export function Visualization() {
       </View>
       <View style={styles.plot1InnerContainer}>
         <View style={styles.plot1}>
-          {plotDays(plot_x, plot_y, activity, medication, symptoms)}
+          {plotDays(plot_x, plot_y, activityTimestamp, medication, symptoms)}
         </View>
       </View>
 
@@ -73,7 +74,7 @@ export function Visualization() {
       </View>
       <View style={styles.plot2InnerContainer}>
         <View style={styles.plot1}>
-          {plotHours(plot_x, plot_y, activity, medication, symptoms)}
+          {plotHours(plot_x, plot_y, activityTimestamp, medication, symptoms)}
         </View>
       </View>
   </View>

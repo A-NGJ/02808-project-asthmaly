@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { Text, View, StyleSheet, Image, Dimensions, Modal, Pressable, ColorPropType} from "react-native";
 import { Button, Box } from "native-base";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {Obs} from '../constants/constants';
+import {Obs, Field} from '../constants/constants';
 import FirebaseConn from '../connection/firestore';
 import { useIsFocused } from "@react-navigation/native";
 import { useTheme } from "@react-navigation/native";
@@ -65,12 +65,12 @@ export function Home(props){
 
   useEffect(() => {
     const fetchFirebase = async () => {
-      const name = await firebaseConn.getName();
-      const email = await firebaseConn.getEmail();
+      const user_data = await firebaseConn.getAll();
+      const name = Field.NAME in user_data ? user_data[Field.NAME] : '';
       setName(name);
-      setEmail(email)
+      setEmail(user_data[Field.EMAIL]);
     }
-    fetchFirebase();
+    fetchFirebase().catch(console.error);
   }, [props, isFocused]);
 
   function radioButtonCallback(value) {
