@@ -16,7 +16,7 @@ function make_data_helper(dates, x_name, y_name) {
   return datalist
 }
 
-/*const dummy_data = [{timestamp: new Date(1618420117245), type: "Biking"},
+const dummy_data = [{timestamp: new Date(1618420117245), type: "Biking"},
                     {timestamp: new Date(1618420717245), type: "Walking"},
                     {timestamp: new Date(1618421317245), type: "Walking"},
                     {timestamp: new Date(1618430117245), type: "Biking"},
@@ -25,41 +25,39 @@ function make_data_helper(dates, x_name, y_name) {
                     {timestamp: new Date(1618821317245), type: "Climbing"},
                     {timestamp: new Date(1618930117245), type: "Climbing"},
                     {timestamp: new Date(1618931187245), type: "Biking"}]
-// console.log(dummy_data[0]['timestamp'])
-// console.log(dummy_data[0]['type'])
-
-let timestamps = dummy_data.map(a => a.timestamp);
-let types = dummy_data.map(a => a.type);
-let unique_types = Array.from(new Set(types));
-var exercise_number = new Object();
-
-for (const type of unique_types) {
-  exercise_number[type] = 0;
-}
-
-
-for (const type of types) {
-  exercise_number[type] += 1;
-}
-
-exercise_number = make_data_helper(exercise_number, "Exercise", "Count")
-
-// console.log(exercise_number);*/
 
 export function plotExercises(figsize_x, figsize_y, activity) {
-  let types = activity.map(a => a.type ? a.type : "other");
-  let unique_types = Array.from(new Set(types));
-  var activity_data = new Object();
-
-  for (const type of unique_types) {
-    activity_data[type] = 0;
+  if(activity){
+    let types = activity.map(a => a.type);
+    var unique_types = Array.from(new Set(types));
+    var activity_data = new Object();
+  
+    for (const type of unique_types) {
+      activity_data[type] = 0;
+    }
+  
+    for (const type of types) {
+      activity_data[type] += 1;
+    }
+  
+    activity_data = make_data_helper(activity_data, "Exercise", "Count")
+  }
+  else{
+    let types = dummy_data.map(a => a.type);
+    var unique_types = Array.from(new Set(types));
+    var activity_data = new Object();
+  
+    for (const type of unique_types) {
+      activity_data[type] = 0;
+    }
+  
+    for (const type of types) {
+      activity_data[type] += 1;
+    }
+  
+    activity_data = make_data_helper(activity_data, "Exercise", "Count")
   }
 
-  for (const type of types) {
-    activity_data[type] += 1;
-  }
-
-  activity_data = make_data_helper(activity_data, "Exercise", "Count")
   
   return (
     <VictoryChart
