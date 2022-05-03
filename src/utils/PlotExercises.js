@@ -6,7 +6,6 @@ import {darkAndBlack} from './PlotTheme';
 import Colors from './color'
 
 // The function in this script makes it possible to create the second plot from the figma protype of the exercise window
-
 function make_data_helper(dates, x_name, y_name) {
   var datalist = [];
   for (const key in dates) {
@@ -17,37 +16,20 @@ function make_data_helper(dates, x_name, y_name) {
   return datalist
 }
 
-const dummy_data = [{timestamp: new Date(1618420117245), type: "Biking"},
-                    {timestamp: new Date(1618420717245), type: "Walking"},
-                    {timestamp: new Date(1618421317245), type: "Walking"},
-                    {timestamp: new Date(1618430117245), type: "Biking"},
-                    {timestamp: new Date(1618620117245), type: "Biking"},
-                    {timestamp: new Date(1618720717245), type: "Walking"},
-                    {timestamp: new Date(1618821317245), type: "Climbing"},
-                    {timestamp: new Date(1618930117245), type: "Climbing"},
-                    {timestamp: new Date(1618931187245), type: "Biking"}]
-// console.log(dummy_data[0]['timestamp'])
-// console.log(dummy_data[0]['type'])
+export function plotExercises(figsize_x, figsize_y, activity) {
+  let types = activity.map(a => a.type);
+  let unique_types = Array.from(new Set(types));
+  var activity_data = new Object();
 
-let timestamps = dummy_data.map(a => a.timestamp);
-let types = dummy_data.map(a => a.type);
-let unique_types = Array.from(new Set(types));
-var exercise_number = new Object();
+  for (const type of unique_types) {
+    activity_data[type] = 0;
+  }
 
-for (const type of unique_types) {
-  exercise_number[type] = 0;
-}
+  for (const type of types) {
+    activity_data[type] += 1;
+  }
 
-
-for (const type of types) {
-  exercise_number[type] += 1;
-}
-
-exercise_number = make_data_helper(exercise_number, "Exercise", "Count")
-
-// console.log(exercise_number);
-
-export function plotExercises(figsize_x, figsize_y) {
+  activity_data = make_data_helper(activity_data, "Exercise", "Count")
   return (
     <VictoryChart
       domainPadding={20}
@@ -76,7 +58,7 @@ export function plotExercises(figsize_x, figsize_y) {
       />
       <VictoryStack>
         <VictoryBar
-          data={exercise_number}
+          data={activity_data}
           x="Exercise"
           y="Count"
           barWidth = {40}
