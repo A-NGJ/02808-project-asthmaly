@@ -76,7 +76,7 @@ export function Visualization() {
           {plotHours(plot_x, plot_y, activity, medication, symptoms)}
         </View>
       </View>
-    </View>
+  </View>
   );
 }
 

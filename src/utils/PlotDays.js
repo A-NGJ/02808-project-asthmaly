@@ -10,7 +10,9 @@ import {
   Background,
 } from 'victory-native';
 import {darkAndBlack} from './PlotTheme';
-import Colors from '../utils/color';
+import {getData} from './GetData';
+import {Obs} from '../constants/constants';
+import Colors from '../utils/color'
 
 // Define all days and all hours for use in GetDateDays and GetDateHours
 const all_days = Array.from({length: 31}, (_, i) => (i + 1).toString());
