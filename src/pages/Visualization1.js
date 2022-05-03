@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {plotHours} from '../utils/PlotHours';
 import {plotExerciseHours} from '../utils/PlotExerciseHours';
 import {plotExercises} from '../utils/PlotExercises';
 import Colors from '../utils/color'
 import FirebaseConn from '../connection/firestore';
 import {useIsFocused} from '@react-navigation/native';
-import {GetDateHours} from '../utils/PlotHours';
-import {GetDateDays} from '../utils/PlotDays';
-import {Field, Obs} from '../constants/constants';
+import {Obs} from '../constants/constants';
 
 Visualization1.navigationOptions = ({ navigation }) => ({
   tabBarLabel: "Visualization",
@@ -28,17 +25,6 @@ Visualization1.navigationOptions = ({ navigation }) => ({
     />
   ),
 });
-
-function obs2date(data) {
-  let dateTimes = data.map(x => new Date(x));
-  const dateTimeByDay = GetDateDays(dateTimes);
-  const dateTimeByHours = GetDateHours(dateTimes);
-  return {
-    dateTimeByDay,
-    dateTimeByHours,
-  };
-}
-
 
 export function Visualization1() {
   const plot_x = 375;
@@ -74,7 +60,7 @@ export function Visualization1() {
       </View>
       <View style={{ top: -100, right: 34, justifyContent: "center", alignItems: "center" }}>
         <View style={styles.plot1}>
-          {plotExerciseHours(plot_x, plot_y)}
+          {plotExerciseHours(plot_x, plot_y, activity)}
         </View>
       </View>
     </View>
