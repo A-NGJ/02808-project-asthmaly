@@ -137,12 +137,12 @@ function TopTabBar({ state, descriptors, navigation }) {
   );
 }
 
-export function VisTopTabNavigator() {
+export function VisTopTabNavigator(props) {
   return (
     <TopTab.Navigator
       tabBar={(props) => <TopTabBar {...props} />}>
-      <TopTab.Screen key="symptoms" name="Symptoms" component={Visualization} />
-      <TopTab.Screen key="activity" name="Activity" component={Visualization1} />
+      <TopTab.Screen key="symptoms" name="Symptoms" props={props} component={Visualization} />
+      <TopTab.Screen key="activity" name="Activity" props={props} component={Visualization1} />
     </TopTab.Navigator>
   );
 }

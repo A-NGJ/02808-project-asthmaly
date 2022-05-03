@@ -10,8 +10,6 @@ import {
   Background,
 } from 'victory-native';
 import {darkAndBlack} from './PlotTheme';
-import {getData} from './GetData';
-import {Obs} from '../constants/constants';
 import Colors from '../utils/color';
 
 // Define all hours for use in GetDateHours
@@ -54,11 +52,8 @@ function daysInMonth(month, year) {
   return new Date(year, month, 0).getDate();
 }
 
-export function plotHours(figsize_x, figsize_y) {
+export function plotHours(figsize_x, figsize_y, activity, medication, symptoms) {
   const barRatio = 1.0;
-  const getActivity = getData(Obs.ACTIVITY);
-  const getMedication = getData(Obs.MEDICATION);
-  const getSymptoms = getData(Obs.SYMPTOMS);
 
   return (
     <VictoryChart
@@ -94,19 +89,19 @@ export function plotHours(figsize_x, figsize_y) {
       />
       <VictoryStack>
         <VictoryBar
-          data={getActivity.dateTimeByHours}
+          data={activity.dateTimeByHours}
           x="Hours"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={getMedication.dateTimeByHours}
+          data={medication.dateTimeByHours}
           x="Hours"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={getSymptoms.dateTimeByHours}
+          data={symptoms.dateTimeByHours}
           x="Hours"
           y="Count"
           barRatio={barRatio}

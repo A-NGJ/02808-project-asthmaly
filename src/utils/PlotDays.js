@@ -1,6 +1,14 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import { VictoryBar, VictoryChart, VictoryStack, VictoryAxis, VictoryLegend, VictoryLabel, Background} from "victory-native";
+import {
+  VictoryBar,
+  VictoryChart,
+  VictoryStack,
+  VictoryAxis,
+  VictoryLegend,
+  VictoryLabel,
+  Background,
+} from 'victory-native';
 import {darkAndBlack} from './PlotTheme';
 import {getData} from './GetData';
 import {Obs} from '../constants/constants';
@@ -34,7 +42,7 @@ export function GetDateDays(dates) {
 
   for (let i = 0; i < dates.length; i++) {
     // Get day number and convert to string
-    const day = dates[i].getHours().toString();
+    const day = dates[i].getDate().toString();
     // Increment if day has been observed
     dateTimes[day] += 1;
   }
@@ -46,11 +54,8 @@ function daysInMonth(month, year) {
   return new Date(year, month, 0).getDate();
 }
 
-export function plotDays(figsize_x, figsize_y) {
+export function plotDays(figsize_x, figsize_y, activity, medication, symptoms) {
   const barRatio = 1.0;
-  const getActivity = getData(Obs.ACTIVITY);
-  const getMedication = getData(Obs.MEDICATION);
-  const getSymptoms = getData(Obs.SYMPTOMS);
 
   return (
     <VictoryChart
@@ -58,41 +63,43 @@ export function plotDays(figsize_x, figsize_y) {
       theme={darkAndBlack}
       width={figsize_x}
       height={figsize_y}
-      padding={{ top: 40, bottom: 80, left: 50, right: 120 }}
+      padding={{top: 40, bottom: 80, left: 50, right: 120}}
       style={{
-        background: { fill: Colors.GRAY }
+        background: {fill: Colors.GRAY},
       }}
-      backgroundComponent={<Background x={-40} y={30} width={figsize_x + 35} height={figsize_y - 60}/>}
-    >
-      <VictoryAxis
-        tickFormat={all_days}
-        fixLabelOverlap={true}
-        label="Day of Month"
-      />
+      backgroundComponent={
+        <Background
+          x={-40}
+          y={30}
+          width={figsize_x + 35}
+          height={figsize_y - 60}
+        />
+      }>
+      <VictoryAxis tickFormat={all_days} fixLabelOverlap={true} label="Day of Month" />
       <VictoryAxis
         dependentAxis
         style={{
-          grid: { stroke: '#F4F5F7', strokeWidth: 1 },
+          grid: {stroke: '#F4F5F7', strokeWidth: 1},
         }}
-        tickFormat={(x) => (`${x}`)}
+        tickFormat={x => `${x}`}
         fixLabelOverlap={true}
         label="Symptoms"
       />
       <VictoryStack>
         <VictoryBar
-          data={getActivity.dateTimeByDay}
+          data={activity.dateTimeByDay}
           x="Days"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={getMedication.dateTimeByDay}
+          data={medication.dateTimeByDay}
           x="Days"
           y="Count"
           barRatio={barRatio}
         />
         <VictoryBar
-          data={getSymptoms.dateTimeByDay}
+          data={symptoms.dateTimeByDay}
           x="Days"
           y="Count"
           barRatio={barRatio}
