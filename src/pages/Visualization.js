@@ -39,7 +39,7 @@ export function Visualization() {
   const firebaseConn = FirebaseConn.getInstance();
   const [symptoms, setSymptoms] = useState(obs2date([]));
   const [medication, setMedication] = useState(obs2date([]));
-  const [activity, setActivity] = useState(obs2date([]));
+  const [activityTimestamp, setActivityTimestamp] = useState(obs2date([]));
 
   useEffect(() => {
     const fetchFirebase = async () => {
@@ -47,7 +47,10 @@ export function Visualization() {
       const user_data = await firebaseConn.getAll();
       setSymptoms(obs2date(user_data[Obs.SYMPTOMS]))
       setMedication(obs2date(user_data[Obs.MEDICATION]))
-      // TODO: setActivity
+
+      let activity = user_data[Obs.ACTIVITY];
+      let timestamp = activity.map(d => d.timestamp)
+      setActivityTimestamp(obs2date(timestamp))
     };
     fetchFirebase().catch(console.error);
   }, [isFocused]);
@@ -61,7 +64,7 @@ export function Visualization() {
       </View>
       <View style={styles.plot1InnerContainer}>
         <View style={styles.plot1}>
-          {plotDays(plot_x, plot_y, activity, medication, symptoms)}
+          {plotDays(plot_x, plot_y, activityTimestamp, medication, symptoms)}
         </View>
       </View>
 
@@ -71,7 +74,7 @@ export function Visualization() {
       </View>
       <View style={styles.plot2InnerContainer}>
         <View style={styles.plot1}>
-          {plotHours(plot_x, plot_y, activity, medication, symptoms)}
+          {plotHours(plot_x, plot_y, activityTimestamp, medication, symptoms)}
         </View>
       </View>
   </View>
