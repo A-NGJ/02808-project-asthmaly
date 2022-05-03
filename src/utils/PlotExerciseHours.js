@@ -15,6 +15,16 @@ function make_data_helper(dates, x_name, y_name) {
   return datalist
 }
 
+const dummy_data = [{timestamp: new Date(1618420117245), type: "Biking"},
+                    {timestamp: new Date(1618420717245), type: "Walking"},
+                    {timestamp: new Date(1618421317245), type: "Walking"},
+                    {timestamp: new Date(1618430117245), type: "Biking"},
+                    {timestamp: new Date(1618620117245), type: "Biking"},
+                    {timestamp: new Date(1618720717245), type: "Walking"},
+                    {timestamp: new Date(1618821317245), type: "Climbing"},
+                    {timestamp: new Date(1618930117245), type: "Climbing"},
+                    {timestamp: new Date(1618931187245), type: "Biking"}]
+
 export function plotExerciseHours(figsize_x, figsize_y, activity) {
   const barRatio = 1.0
   // Define all hours for use in GetDateHours
