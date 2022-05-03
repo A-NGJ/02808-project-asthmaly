@@ -27,19 +27,37 @@ const dummy_data = [{timestamp: new Date(1618420117245), type: "Biking"},
                     {timestamp: new Date(1618931187245), type: "Biking"}]
 
 export function plotExercises(figsize_x, figsize_y, activity) {
-  let types = activity.map(a => a.type ? a.type : "other");
-  let unique_types = Array.from(new Set(types));
-  var activity_data = new Object();
-
-  for (const type of unique_types) {
-    activity_data[type] = 0;
+  if(activity){
+    let types = activity.map(a => a.type);
+    var unique_types = Array.from(new Set(types));
+    var activity_data = new Object();
+  
+    for (const type of unique_types) {
+      activity_data[type] = 0;
+    }
+  
+    for (const type of types) {
+      activity_data[type] += 1;
+    }
+  
+    activity_data = make_data_helper(activity_data, "Exercise", "Count")
+  }
+  else{
+    let types = dummy_data.map(a => a.type);
+    var unique_types = Array.from(new Set(types));
+    var activity_data = new Object();
+  
+    for (const type of unique_types) {
+      activity_data[type] = 0;
+    }
+  
+    for (const type of types) {
+      activity_data[type] += 1;
+    }
+  
+    activity_data = make_data_helper(activity_data, "Exercise", "Count")
   }
 
-  for (const type of types) {
-    activity_data[type] += 1;
-  }
-
-  activity_data = make_data_helper(activity_data, "Exercise", "Count")
   
   return (
     <VictoryChart

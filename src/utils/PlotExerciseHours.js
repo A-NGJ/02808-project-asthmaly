@@ -30,43 +30,84 @@ export function plotExerciseHours(figsize_x, figsize_y, activity) {
   // Define all hours for use in GetDateHours
   const all_hours = Array.from({length: 24}, (_, i) => (i + 1).toString());
 
-  let timestamps = activity.map(a => new Date(a.timestamp));
-  let types = activity.map(a => a.type ? a.type : "other");
-  let unique_types = Array.from(new Set(types));
-
-  var byhour1 = new Object();  // byhour1 will contain all "Biking" instances
-  var byhour2 = new Object();  // byhour2 will contain all "Walking" instances
-  var byhour3 = new Object();  // byhour3 will contain all "Climbing" instances
-
-  // Initialize all hour values
-  for (let all_hour of all_hours) {
-    // For some reason, this fix is needed even though the values go from 1 to 24 already
-    byhour1[all_hour.toString()] = 0;
-    byhour2[all_hour.toString()] = 0;
-    byhour3[all_hour.toString()] = 0;
+  if(activity){
+    let timestamps = activity.map(a => new Date(a.timestamp));
+    let types = activity.map(a => a.type);
+    let unique_types = Array.from(new Set(types));
+  
+    var byhour1 = new Object();  // byhour1 will contain all "Biking" instances
+    var byhour2 = new Object();  // byhour2 will contain all "Walking" instances
+    var byhour3 = new Object();  // byhour3 will contain all "Climbing" instances
+  
+    // Initialize all hour values
+    for (let all_hour of all_hours) {
+      // For some reason, this fix is needed even though the values go from 1 to 24 already
+      byhour1[all_hour.toString()] = 0;
+      byhour2[all_hour.toString()] = 0;
+      byhour3[all_hour.toString()] = 0;
+    }
+  
+    // Loop over timestamps and types of exercises and insert the timestamp as an observation of its hour into the correct object
+    timestamps.forEach((timestamp, index) => {
+      const type = types[index];
+      var hour = timestamp.getHours().toString();  // Get hour and convert to string
+        
+      // Increment if hour has been observed
+      if (type === unique_types[0]) {
+        byhour1[hour] += 1;
+      }
+      else if (type === unique_types[1]) {
+        byhour2[hour] += 1;
+      }
+      else if (type === unique_types[2]) {
+        byhour3[hour] += 1;
+      }
+    });
+  
+    // Get data into correct format, see function for details
+    byhour1 = make_data_helper(byhour1, "Hours", "Count");
+    byhour2 = make_data_helper(byhour2, "Hours", "Count");
+    byhour3 = make_data_helper(byhour3, "Hours", "Count");
   }
-
-  // Loop over timestamps and types of exercises and insert the timestamp as an observation of its hour into the correct object
-  timestamps.forEach((timestamp, index) => {
-    const type = types[index];
-    var hour = timestamp.getHours().toString();  // Get hour and convert to string
-      
-    // Increment if hour has been observed
-    if (type === unique_types[0]) {
-      byhour1[hour] += 1;
+  else{
+    let timestamps = dummy_data.map(a => new Date(a.timestamp));
+    let types = dummy_data.map(a => a.type);
+    let unique_types = Array.from(new Set(types));
+  
+    var byhour1 = new Object();  // byhour1 will contain all "Biking" instances
+    var byhour2 = new Object();  // byhour2 will contain all "Walking" instances
+    var byhour3 = new Object();  // byhour3 will contain all "Climbing" instances
+  
+    // Initialize all hour values
+    for (let all_hour of all_hours) {
+      // For some reason, this fix is needed even though the values go from 1 to 24 already
+      byhour1[all_hour.toString()] = 0;
+      byhour2[all_hour.toString()] = 0;
+      byhour3[all_hour.toString()] = 0;
     }
-    else if (type === unique_types[1]) {
-      byhour2[hour] += 1;
-    }
-    else if (type === unique_types[2]) {
-      byhour3[hour] += 1;
-    }
-  });
-
-  // Get data into correct format, see function for details
-  byhour1 = make_data_helper(byhour1, "Hours", "Count");
-  byhour2 = make_data_helper(byhour2, "Hours", "Count");
-  byhour3 = make_data_helper(byhour3, "Hours", "Count");
+  
+    // Loop over timestamps and types of exercises and insert the timestamp as an observation of its hour into the correct object
+    timestamps.forEach((timestamp, index) => {
+      const type = types[index];
+      var hour = timestamp.getHours().toString();  // Get hour and convert to string
+        
+      // Increment if hour has been observed
+      if (type === unique_types[0]) {
+        byhour1[hour] += 1;
+      }
+      else if (type === unique_types[1]) {
+        byhour2[hour] += 1;
+      }
+      else if (type === unique_types[2]) {
+        byhour3[hour] += 1;
+      }
+    });
+  
+    // Get data into correct format, see function for details
+    byhour1 = make_data_helper(byhour1, "Hours", "Count");
+    byhour2 = make_data_helper(byhour2, "Hours", "Count");
+    byhour3 = make_data_helper(byhour3, "Hours", "Count");
+  }
   return (
     <VictoryChart
       domainPadding={20}
