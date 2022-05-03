@@ -66,8 +66,9 @@ export function Home(props){
   useEffect(() => {
     const fetchFirebase = async () => {
       const user_data = await firebaseConn.getAll();
-      setName(user_data[Field.NAME]);
-      setEmail(user_data[Field.EMAIL])
+      const name = Field.NAME in user_data ? user_data[Field.NAME] : '';
+      setName(name);
+      setEmail(user_data[Field.EMAIL]);
     }
     fetchFirebase().catch(console.error);
   }, [props, isFocused]);
