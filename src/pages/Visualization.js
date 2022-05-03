@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {plotHours} from '../utils/PlotHours';
 import {plotDays} from '../utils/PlotDays';
-import { useIsFocused } from "@react-navigation/native";
+import {useIsFocused} from '@react-navigation/native';
 import FirebaseConn from '../connection/firestore';
 import {GetDateHours} from '../utils/PlotHours';
 import {GetDateDays} from '../utils/PlotDays';
@@ -22,12 +22,12 @@ Visualization.navigationOptions = ({navigation}) => ({
 });
 
 function obs2date(data) {
-  dateTimes = data.map(x => new Date(x))
+  let dateTimes = data.map(x => new Date(x));
   const dateTimeByDay = GetDateDays(dateTimes);
   const dateTimeByHours = GetDateHours(dateTimes);
   return {
     dateTimeByDay,
-    dateTimeByHours
+    dateTimeByHours,
   };
 }
 
@@ -42,19 +42,16 @@ export function Visualization() {
 
   useEffect(() => {
     const fetchFirebase = async () => {
-      let symptoms = await firebaseConn.getSymptoms();
-      symptoms = obs2date(symptoms)
-      setSymptoms(symptoms);
+      let symptoms_data = await firebaseConn.getSymptoms();
+      setSymptoms(obs2date(symptoms_data));
 
-      let medication = await firebaseConn.getMedication();
-      medication = obs2date(medication);
-      setMedication(medication);
+      let medication_data = await firebaseConn.getMedication();
+      setMedication(obs2date(medication_data));
 
-      let activity = await firebaseConn.getActivity();
-      activity = obs2date(activity)
-      setActivity(activity);
+      let activity_data = await firebaseConn.getActivity();
+      setActivity(obs2date(activity_data));
     };
-    return () => fetchFirebase();
+    fetchFirebase().catch(console.error);
   }, [isFocused]);
 
   return (
@@ -65,7 +62,9 @@ export function Visualization() {
         <Text style={styles.mainText}>NUMBER OF SYMPTOMS BY DATE</Text>
       </View>
       <View style={styles.plot1InnerContainer}>
-        <View style={styles.plot1}>{plotDays(plot_x, plot_y, activity, medication, symptoms)}</View>
+        <View style={styles.plot1}>
+          {plotDays(plot_x, plot_y, activity, medication, symptoms)}
+        </View>
       </View>
 
       {/* Second plot */}
@@ -73,9 +72,11 @@ export function Visualization() {
         <Text style={styles.mainText}>NUMBER OF SYMPTOMS BY HOUR</Text>
       </View>
       <View style={styles.plot2InnerContainer}>
-        <View style={styles.plot1}>{plotHours(plot_x, plot_y, activity, medication, symptoms)}</View>
+        <View style={styles.plot1}>
+          {plotHours(plot_x, plot_y, activity, medication, symptoms)}
+        </View>
       </View>
-  </View> 
+  </View>
   );
 }
 
