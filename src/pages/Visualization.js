@@ -7,6 +7,7 @@ import {useIsFocused} from '@react-navigation/native';
 import FirebaseConn from '../connection/firestore';
 import {GetDateHours} from '../utils/PlotHours';
 import {GetDateDays} from '../utils/PlotDays';
+import {Field, Obs} from '../constants/constants';
 
 Visualization.navigationOptions = ({navigation}) => ({
   tabBarLabel: 'Visualization',
@@ -42,14 +43,11 @@ export function Visualization() {
 
   useEffect(() => {
     const fetchFirebase = async () => {
-      let symptoms_data = await firebaseConn.getSymptoms();
-      setSymptoms(obs2date(symptoms_data));
 
-      let medication_data = await firebaseConn.getMedication();
-      setMedication(obs2date(medication_data));
-
-      let activity_data = await firebaseConn.getActivity();
-      setActivity(obs2date(activity_data));
+      const user_data = await firebaseConn.getAll();
+      setSymptoms(obs2date(user_data[Obs.SYMPTOMS]))
+      setMedication(obs2date(user_data[Obs.MEDICATION]))
+      // TODO: setActivity
     };
     fetchFirebase().catch(console.error);
   }, [isFocused]);
