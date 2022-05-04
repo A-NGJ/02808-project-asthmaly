@@ -38,6 +38,7 @@ export function plotExerciseHours(figsize_x, figsize_y, activity) {
     var byhour1 = new Object();  // byhour1 will contain all "Biking" instances
     var byhour2 = new Object();  // byhour2 will contain all "Walking" instances
     var byhour3 = new Object();  // byhour3 will contain all "Climbing" instances
+    var byhour4 = new Object();  // byhour3 will contain all "Climbing" instances
   
     // Initialize all hour values
     for (let all_hour of all_hours) {
@@ -45,6 +46,7 @@ export function plotExerciseHours(figsize_x, figsize_y, activity) {
       byhour1[all_hour.toString()] = 0;
       byhour2[all_hour.toString()] = 0;
       byhour3[all_hour.toString()] = 0;
+      byhour4[all_hour.toString()] = 0;
     }
   
     // Loop over timestamps and types of exercises and insert the timestamp as an observation of its hour into the correct object
@@ -62,12 +64,16 @@ export function plotExerciseHours(figsize_x, figsize_y, activity) {
       else if (type === unique_types[2]) {
         byhour3[hour] += 1;
       }
+      else if (type === unique_types[3]) {
+        byhour4[hour] += 1;
+      }
     });
   
     // Get data into correct format, see function for details
     byhour1 = make_data_helper(byhour1, "Hours", "Count");
     byhour2 = make_data_helper(byhour2, "Hours", "Count");
     byhour3 = make_data_helper(byhour3, "Hours", "Count");
+    byhour4 = make_data_helper(byhour4, "Hours", "Count");
   }
   else{
     let timestamps = dummy_data.map(a => new Date(a.timestamp));
@@ -76,7 +82,8 @@ export function plotExerciseHours(figsize_x, figsize_y, activity) {
   
     var byhour1 = new Object();  // byhour1 will contain all "Biking" instances
     var byhour2 = new Object();  // byhour2 will contain all "Walking" instances
-    var byhour3 = new Object();  // byhour3 will contain all "Climbing" instances
+    var byhour3 = new Object();  // byhour3 will contain all "Running" instances
+    var byhour4 = new Object();  // byhour3 will contain all "Other" instances
   
     // Initialize all hour values
     for (let all_hour of all_hours) {
@@ -84,6 +91,7 @@ export function plotExerciseHours(figsize_x, figsize_y, activity) {
       byhour1[all_hour.toString()] = 0;
       byhour2[all_hour.toString()] = 0;
       byhour3[all_hour.toString()] = 0;
+      byhour4[all_hour.toString()] = 0;
     }
   
     // Loop over timestamps and types of exercises and insert the timestamp as an observation of its hour into the correct object
@@ -101,12 +109,16 @@ export function plotExerciseHours(figsize_x, figsize_y, activity) {
       else if (type === unique_types[2]) {
         byhour3[hour] += 1;
       }
+      else if (type === unique_types[3]) {
+        byhour4[hour] += 1;
+      }
     });
   
     // Get data into correct format, see function for details
     byhour1 = make_data_helper(byhour1, "Hours", "Count");
     byhour2 = make_data_helper(byhour2, "Hours", "Count");
     byhour3 = make_data_helper(byhour3, "Hours", "Count");
+    byhour4 = make_data_helper(byhour4, "Hours", "Count");
   }
   return (
     <VictoryChart
@@ -124,11 +136,17 @@ export function plotExerciseHours(figsize_x, figsize_y, activity) {
         tickFormat={all_hours}
         fixLabelOverlap={true}
         label="Hour of Day"
+        style={{
+          tickLabels: {fontWeight: 'bold'},
+          axisLabel: {fontSize: 16},
+        }}
       />
       <VictoryAxis
         dependentAxis
         style={{
           grid: { stroke: '#F4F5F7', strokeWidth: 1 },
+          axisLabel: {fontSize: 16},
+          tickLabels: {fontWeight: 'bold'}
         }}
         tickFormat={(x) => (`${x}`)}
         fixLabelOverlap={true}
@@ -154,10 +172,16 @@ export function plotExerciseHours(figsize_x, figsize_y, activity) {
           y="Count"
           barRatio={barRatio}
         />
+        <VictoryBar
+          data={byhour4}
+          x="Hours"
+          y="Count"
+          barRatio={barRatio}
+        />
       </VictoryStack>
       <VictoryLegend
         data={[
-          { name: "Biking" }, { name: "Walking" }, { name: "Climbing" }
+          { name: "Cycling" }, { name: "Walking" }, { name: "Running" }, { name: "Other" }
         ]}
         title="Status"
         labelComponent={<VictoryLabel angle={0}/>}

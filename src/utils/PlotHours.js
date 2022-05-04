@@ -77,11 +77,17 @@ export function plotHours(figsize_x, figsize_y, activity, medication, symptoms) 
         tickFormat={all_hours}
         fixLabelOverlap={true}
         label="Hour of Day"
+        style={{
+          ticks: {size: -4},
+          axisLabel: {fontSize: 16},
+        }}
       />
       <VictoryAxis
         dependentAxis
         style={{
           grid: {stroke: '#F4F5F7', strokeWidth: 1},
+          tickLabels: {fontWeight: 'bold'},
+          axisLabel: {fontSize: 16} ,
         }}
         tickFormat={x => `${x}`}
         fixLabelOverlap={true}
