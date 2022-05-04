@@ -14,6 +14,7 @@ const colors = [
     "#3182bd",
     "#6baed6",
     "#9ecae1",
+    "#ffffff",
   ];
   
   const charcoal = "#9e9e9e";  // Axis and text color

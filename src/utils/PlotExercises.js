@@ -65,7 +65,7 @@ export function plotExercises(figsize_x, figsize_y, activity) {
       theme={darkAndBlack}
       width={figsize_x}
       height={figsize_y}
-      padding={{ top: 40, bottom: 80, left: 50, right: 120 }}
+      padding={{ top: 40, bottom: 80, left: 50, right: 50 }}
       style={{
         background: { fill: Colors.GRAY }
       }}
@@ -75,13 +75,20 @@ export function plotExercises(figsize_x, figsize_y, activity) {
         tickFormat={unique_types}
         fixLabelOverlap={true}
         label="Exercise Type"
+        style={{
+          ticks: {size: -4},
+          tickLabels: {fontWeight: 'bold'},
+          axisLabel: {fontSize: 16}
+        }}
       />
       <VictoryAxis
         dependentAxis
         style={{
           grid: { stroke: '#F4F5F7', strokeWidth: 1 },
+          axisLabel: {fontSize: 16},
+          tickLabelsk: {fontWeight: 'bold'},
         }}
-        tickFormat={(x) => (`${x}`)}
+        tickFormat={(x) => x%1 === 0 ? x : undefined}
         fixLabelOverlap={true}
         label="Symptoms"
       />

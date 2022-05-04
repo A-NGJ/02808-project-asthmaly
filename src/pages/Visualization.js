@@ -59,8 +59,8 @@ export function Visualization() {
     // <Text>Placeholder text</Text>
     <View style={styles.plot1Container}>
       {/* Fist plot */}
-      <View>
-        <Text style={styles.mainText}>NUMBER OF SYMPTOMS BY DAY</Text>
+      <View style={styles.container}>
+        <Text style={styles.mainText}>Symptoms By Day</Text>
       </View>
       <View style={styles.plot1InnerContainer}>
         <View style={styles.plot1}>
@@ -69,8 +69,8 @@ export function Visualization() {
       </View>
 
       {/* Second plot */}
-      <View style={styles.plot2Container}>
-        <Text style={styles.mainText}>NUMBER OF SYMPTOMS BY HOUR</Text>
+      <View style={[styles.container, styles.plot2Container]}>
+        <Text style={styles.mainText}>Symptoms By Hour</Text>
       </View>
       <View style={styles.plot2InnerContainer}>
         <View style={styles.plot1}>
@@ -112,4 +112,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#ffff',
   },
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+  }
 });
